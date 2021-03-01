@@ -183,28 +183,25 @@ function validationCaseFour(chosenCards, card) {
 // need to add property to card that override chosen
 function asyncValidationCase(playerDeck) {
   const setArray = getArrayWithHighestAppearance(playerDeck);
+  console.log("after getArray...", setArray);
   // no sufficient suit apearances
   if (!setArray) {
     return;
     // array of cards that can possibly make a set
-  } else {
     // Checks that for every number in the array there is a consecutive number
+  } else {
 
     setArray.sort((a, b) => {
       return a.id - b.id;
     });
+    console.log("after sort");
     let temp = [];
     // [1,0,3,4,7]
-    console.log(setArray);
-    for (let index = 0; index < setArray.length; index++) {
-      // if (setArray) {
-
-      // }
+    for (let index = 0; index < setArray.length - 1; index++) {
       if (index === setArray.length - 2 && setArray[index] === setArray[index + 1].id - 1) {
         temp.push(setArray[index]);
         temp.push(setArray[index + 1]);
         console.log("1");
-        break;
       }
       else if (setArray[index].id === setArray[index + 1].id - 1) {
         temp.push(setArray[index]);
@@ -224,16 +221,23 @@ function asyncValidationCase(playerDeck) {
       }
 
     }
-    return temp.length ? 0 : false;
+    console.log(temp.length, "before return");
+    return temp.length > 2 ? temp : false;
+
     // make this cards override prop make sure to remove the overide
   }
 }
 
 // returns array with the highest suit appearances or -1 it didnt find one with more than 3 apearances
+// case of jokers need to return all the possible arrays 
 function getArrayWithHighestAppearance(playerDeck) {
   const suits = ['heart', 'diamond', 'club', 'spade'];
   for (const suit of suits) {
+    const jokerArr = playerDeck.filter((card) => { return card.id === 0 });
     const suitArr = playerDeck.filter((card) => { return card.suit === suit });
+    if (jokerArr) {
+      suitArr.push(...jokerArr);
+    }
     if (suitArr.length > 2) return suitArr;
   }
 

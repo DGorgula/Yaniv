@@ -392,35 +392,23 @@ function checkValidChoose(card, playerDeck) {
     return card.chosen;
   });
 
-  // const set = asyncValidationCase(playerDeck);
-  // if (set) {
-  //   console.log(set);
-  //   console.log(card);
-  //   // create a flag maybe;
-  //   if (set.includes(card)) {
-  //     for (const chosenCard of chosenCards) {
-  //       if (set.includes(chosenCard)) {
-  //         continue;
-  //       } else if (!set.includes(chosenCard)) {
-  //         break;
-  //       }
-  //       else {
-  //       }
-  //       return true;
-  //     }
-  //   }
-  // }
-
-
-  // [2, 3, 4]
-  // 3, 4
-  // card
-  // if chosenCards are in set
-  // if card is in set
-
-  // if (card.suit === )
-
-  // here to filter the chosen cards from player deck
+  const set = asyncValidationCase(playerDeck);
+  if (set) {
+    console.log("set " + set);
+    // create a flag maybe;
+    // 2
+    console.log(typeof (set));
+    console.log("if " + set.includes(card));
+    if (set.includes(card)) {
+      for (const chosenCard of chosenCards) {
+        if (!set.includes(chosenCard)) {
+          return false;
+        }
+      }
+      return true;
+    }
+  } else {
+  }
 
   if (chosenCards.length === 0) {
     return true;
@@ -440,6 +428,3 @@ function checkValidChoose(card, playerDeck) {
     // console.log("else selected");
   }
 }
-// true
-// - same id
-// - continue to be consectuive numbers with the same sign
