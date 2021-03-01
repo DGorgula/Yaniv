@@ -251,13 +251,8 @@ function updateScoreTable(gameControl) {
   }
 }
 
-// resets the hand score of each player and sums it in his score property
-function playersCalculateFinshedRound(players) {
-  for (const player of players) {
-    player.resetRoundScoreAndAddToScoreProp();
-  }
-}
-//()
+
+
 // sets the board to a new round
 function newRoundDealing(gameControl) {
   if (JSON.stringify(gameControl) === JSON.stringify({})) {
@@ -341,18 +336,7 @@ function setNewFirstTurn(gameControl) {
   winner.turn = true;
 }
 
-export { addPlayer, getCheckedAvatar, renderWelcomePagePlayers, guessACard, startGame, createDesk, renderBoard, createPlayerDiv, updateScoreTable, playersCalculateFinshedRound, newRoundDealing };
-
-
-
-
-// need to add joker functionality
-// fix unchoose option ??????????????????
-// fix un syncronized selections ?????????????????????
-// 
-// consecutive numbers- 
-//  put all cards ranks in array and look for index
-//  
+export { addPlayer, getCheckedAvatar, renderWelcomePagePlayers, guessACard, startGame, createDesk, renderBoard, createPlayerDiv, updateScoreTable, newRoundDealing };
 // chosenCards[0].rank is not a property (chosen cards[0] is an element)
 
 function checkValidChoose(card, playerDeck) {
