@@ -7,12 +7,7 @@ import {
   guessACard,
   getCheckedAvatar,
   switchTurn,
-  updatePlayersCardsCounter,
-  validationCaseOne,
-  validationCaseTwo,
-  validationCaseThree,
-  validationCaseFour,
-  asyncValidationCase,
+  allValidPossibleSets,
 } from "./assistence-functions.js";
 
 // Event Listeners:
@@ -22,12 +17,64 @@ function yanivListener(gameControl) {
   theWinnerIs(gameControl);
   updateScoreTable(gameControl); // how is the winner , giving score , update
   renderScoreTable(gameControl); /// present the winner and the table
+
+  const endGame = playersOver200Out(gameControl);
+  if (endGame === "endGame") {
+    return;
+  }
   setNewFirstTurn(gameControl); // first player turn
-  debugger;
   setTimeout(() => {
     newRoundDealing(gameControl); //sets the desk for new round
     // updatePlayersCardsCounter(gameControl); fixed in the newRoundDealing func ^^
-  }, 7000);
+  }, 5);
+}
+
+function playersOver200Out(gameControl) {
+  const players = gameControl.players;
+  const tableScore = gameControl.tableScore;
+  const playersLength = players.length;
+  let looserPlayers = [];
+  for (let i = 0; i < playersLength; i++) {
+    if (players[i].score > 200) {
+      looserPlayers.push(i);
+      console.log("player loos");
+    } else if (players[i].score === 200) {
+      players[i].score = 0;
+      tableScore.total[players[i].name] = 0;
+    }
+  }
+  looserPlayers.sort((a, b) => {
+    return b - a;
+  });
+  console.log(looserPlayers, players);
+
+  for (const i of looserPlayers) {
+    players.splice(i, 1);
+  }
+  console.log(looserPlayers, players);
+
+  if (players.length === 1) {
+    endGame(gameControl);
+    debugger;
+    // setTimeout(location.reload, 7000);
+    setTimeout(() => {
+      document.location.reload(true);
+    }, 20000);
+    return "endGame";
+  }
+  return looserPlayers;
+}
+
+function endGame(gameControl) {
+  const gameWinner = gameControl.players[0].name;
+  const deskContainer = catchElement("desk-container");
+  newElement(
+    "div",
+    null,
+    `The Winner is ${gameWinner}!`,
+    deskContainer,
+    "game-winner-div"
+  );
 }
 
 function theWinnerIs(gameControl) {
@@ -106,11 +153,13 @@ function renderWelcomePagePlayers(player) {
 
 function createDesk(gameControl) {
   const deskContainer = catchElement("desk-container");
-  const pileDeck = newElement("div", "pile-deck", null, deskContainer);
-  pileDeck.innerText = gameControl.pileDeck.cards[
-    gameControl.pileDeck.cards.length - 1
-  ].cardName();
-  pileDeck.style.color = "white";
+  // const pileDeck = newElement("div", "pile-deck", null, deskContainer);
+  const pileDeck = newElement("img", "player-card", null, deskContainer);
+  pileDeck.classList.add("pile-deck");
+  const card =
+    gameControl.pileDeck.cards[gameControl.pileDeck.cards.length - 1];
+  pileDeck.setAttribute("src", `./assets/cards/${card.cardName()}.png`);
+
   const tableDeck = newElement("div", "table-deck", null, deskContainer);
   pileDeck.addEventListener("click", (event) => {
     for (const player of gameControl.players) {
@@ -274,13 +323,6 @@ function updateScoreTable(gameControl) {
   }
 }
 
-// resets the hand score of each player and sums it in his score property
-function playersCalculateFinshedRound(players) {
-  for (const player of players) {
-    player.resetRoundScoreAndAddToScoreProp();
-  }
-}
-//()
 // sets the board to a new round
 function newRoundDealing(gameControl) {
   if (JSON.stringify(gameControl) === JSON.stringify({})) {
@@ -376,6 +418,47 @@ function setNewFirstTurn(gameControl) {
   winner.turn = true;
 }
 
+function checkValidChoose(card, playerDeck) {
+  // check if the click was on a chosen card
+  if (card.chosen) {
+    return true;
+  }
+  const chosenCards = playerDeck.filter((card) => {
+    return card.chosen;
+  });
+
+  // change completely ( take from validationCaseFour)
+  if (chosenCards.length === 0) {
+    return true;
+  } else if (card.rank === chosenCards[0].rank) {
+    return true;
+  }
+
+  // checks whether the card exists in one of the possible sets
+  const setsArray = allValidPossibleSets(playerDeck);
+  if (!setsArray) {
+    return false;
+  }
+  console.log(setsArray);
+  for (const set of setsArray) {
+    if (set) {
+      console.log("set " + set);
+      // create a flag maybe;
+      // 2
+      console.log(typeof set);
+      console.log("if " + set.includes(card));
+      if (set.includes(card)) {
+        for (const chosenCard of chosenCards) {
+          if (!set.includes(chosenCard)) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+  }
+  return false;
+}
 export {
   addPlayer,
   getCheckedAvatar,
@@ -386,75 +469,5 @@ export {
   renderBoard,
   createPlayerDiv,
   updateScoreTable,
-  playersCalculateFinshedRound,
   newRoundDealing,
 };
-
-// need to add joker functionality
-// fix unchoose option ??????????????????
-// fix un syncronized selections ?????????????????????
-//
-// consecutive numbers-
-//  put all cards ranks in array and look for index
-//
-// chosenCards[0].rank is not a property (chosen cards[0] is an element)
-
-function checkValidChoose(card, playerDeck) {
-  // check if the click was on a chosen card
-  if (card.chosen) {
-    return true;
-  }
-  const chosenCards = playerDeck.filter((card) => {
-    return card.chosen;
-  });
-
-  // const set = asyncValidationCase(playerDeck);
-  // if (set) {
-  //   console.log(set);
-  //   console.log(card);
-  //   // create a flag maybe;
-  //   if (set.includes(card)) {
-  //     for (const chosenCard of chosenCards) {
-  //       if (set.includes(chosenCard)) {
-  //         continue;
-  //       } else if (!set.includes(chosenCard)) {
-  //         break;
-  //       }
-  //       else {
-  //       }
-  //       return true;
-  //     }
-  //   }
-  // }
-
-  // [2, 3, 4]
-  // 3, 4
-  // card
-  // if chosenCards are in set
-  // if card is in set
-
-  // if (card.suit === )
-
-  // here to filter the chosen cards from player deck
-
-  if (chosenCards.length === 0) {
-    return true;
-  } else if (chosenCards.length === 1) {
-    // console.log("1 card selected");
-    return validationCaseOne(chosenCards, card);
-  } else if (chosenCards.length === 2) {
-    // console.log("2 card selected");
-    return validationCaseTwo(chosenCards, card);
-  } else if (chosenCards.length === 3) {
-    // console.log("3 card selected");
-    return validationCaseThree(chosenCards, card);
-  } else if (chosenCards.length === 4) {
-    // console.log("4 card selected");
-    return validationCaseFour(chosenCards, card);
-  } else {
-    // console.log("else selected");
-  }
-}
-// true
-// - same id
-// - continue to be consectuive numbers with the same sign

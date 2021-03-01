@@ -8,13 +8,14 @@ import { Deck, Player, PileDeck, TableDeck, Card } from "./export-tomain.js";
 import * as Functions from "./utils.js";
 
 // elements
+
 const addPlayerButton = document.getElementById("add-player-button");
 const startGameButton = document.getElementById("start-button");
+const startNewGameButton = document.getElementById("start-new-game");
 const gameRulesButton = document.getElementById("game-rules");
 const exitRulesButton = document.getElementById("exit-button");
 const aboutUsButton = document.getElementById("about-us");
 
-// variables
 const gameControl = Functions.newRoundDealing({});
 
 // run program
@@ -25,6 +26,11 @@ addPlayerButton.addEventListener("click", (event) => {
 startGameButton.addEventListener("click", (event) => {
   Functions.startGame(gameControl);
 });
+startNewGameButton.addEventListener("click", () => {
+  document.location.reload(true);
+});
+
+// variables
 
 gameRulesButton.addEventListener("click", (event) => {
   const gameRulesDiv = document.getElementById("game-rules-div");
