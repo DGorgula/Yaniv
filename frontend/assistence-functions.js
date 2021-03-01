@@ -117,7 +117,7 @@ function validSet(setArray) {
       continue;
     }
     // pushes the last cell of setArry if part of consecutive numbers;
-    else if (index === setArray.length - 2 && setArray[index] === setArray[index + 1].id - 1) {
+    else if (index === setArray.length - 2 && setArray[index].id === setArray[index + 1].id - 1) {
       validSetArray.push(setArray[index]);
       validSetArray.push(setArray[index + 1]);
       console.log("1");
@@ -145,7 +145,8 @@ function validSet(setArray) {
   return validSetArray.length > 2 ? validSetArray : false;
 }
 
-
+// LISTENNNNNNNNNNNN
+//when fixing jockers make sure to add the jokers to the array 
 // returns array of arrays including all possible set combinations.
 function possibleSetCombinations(playerDeck) {
   const suits = ['heart', 'diamond', 'club', 'spade'];
