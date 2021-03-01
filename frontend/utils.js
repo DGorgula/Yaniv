@@ -26,7 +26,7 @@ function yanivListener(gameControl) {
   setTimeout(() => {
     newRoundDealing(gameControl); //sets the desk for new round
     // updatePlayersCardsCounter(gameControl); fixed in the newRoundDealing func ^^
-  }, 5);
+  }, 5000);
 }
 
 function playersOver200Out(gameControl) {
@@ -154,13 +154,14 @@ function renderWelcomePagePlayers(player) {
 function createDesk(gameControl) {
   const deskContainer = catchElement("desk-container");
   // const pileDeck = newElement("div", "pile-deck", null, deskContainer);
-  const pileDeck = newElement("img", "player-card", null, deskContainer);
+  const deskDiv = newElement("div", null, null, deskContainer, "desk-div");
+  const pileDeck = newElement("img", "player-card", null, deskDiv);
   pileDeck.classList.add("pile-deck");
   const card =
     gameControl.pileDeck.cards[gameControl.pileDeck.cards.length - 1];
   pileDeck.setAttribute("src", `./assets/cards/${card.cardName()}.png`);
+  const tableDeck = newElement("div", "table-deck", null, deskDiv);
 
-  const tableDeck = newElement("div", "table-deck", null, deskContainer);
   pileDeck.addEventListener("click", (event) => {
     for (const player of gameControl.players) {
       if (player.turn) {
