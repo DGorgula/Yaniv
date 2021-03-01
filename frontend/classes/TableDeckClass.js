@@ -21,6 +21,9 @@ export class TableDeck extends Deck {
       ["Queen", 10, 12],
       ["King", 10, 13],
     ];
+    this.cards.push(new Card("Joker", "BlackJoker", 0, 0, true, true));
+    this.cards.push(new Card("Joker", "RedJoker", 0, 0, true, true));
+    this.cards.push(new Card("Joker", "RedJoker", 0, 0, true, true));
     for (const sign of signs) {
       for (const rankAndVal of ranksAndValues) {
         this.cards.push(
@@ -28,8 +31,6 @@ export class TableDeck extends Deck {
         );
       }
     }
-    this.cards.push(new Card("Joker", "Joker", 0, 0, true, true));
-    this.cards.push(new Card("Joker", "Joker", 0, 0, true, true));
   }
 
   setCards(cards) {

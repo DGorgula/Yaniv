@@ -90,6 +90,7 @@ function allValidPossibleSets(playerDeck) {
     const validSets = [];
     for (const set of setsCombinations) {
       const validSetArray = validSet(set);
+      console.log(validSetArray);
       if (validSetArray) {
         validSets.push(validSetArray);
       }
@@ -105,19 +106,40 @@ function validSet(setArray) {
   setArray.sort((a, b) => {
     return a.id - b.id;
   });
-  let jokerCounter = 0;
-  console.log("after sort", setArray);
+  // case one joker
+  if (setArray[0] === 0 && setArray[1] !== 0) {
+    setArray.sort((a, b) => { a - b })
+    console.log(setArray, "first");
+    for (let i = 1; i < setArray.length; i++) {
+      let arr = setArray.slice(0);
+      arr[0].id = arr[i].id + 1;
+      return isValid(arr);
+    }
+    for (let i = 1; i < setArray.length; i++) {
+      console.log(setArray, "second");
+      let arr = setArray.slice(0);
+      arr[0].id = arr[i].id - 1;
+      return isValid(arr);
+    }
+  }
+  // case two joker`s
+  if (setArray[0] === 0 && setArray[1] == 0) {
+  }
+  // case no joker`s
+  else {
+    return isValid(setArray);
+  }
+}
+// let jokerCounter = 0;
+// console.log("after sort", setArray);
+
+
+function isValid(setArray) {
   let validSetArray = [];
   // [1,0,3,4,7]
   for (let index = 0; index < setArray.length - 1; index++) {
-    // counts the jokers
-    if (setArray[index].id === 0) {
-      jokerCounter++;
-      console.log(jokerCounter);
-      continue;
-    }
     // pushes the last cell of setArry if part of consecutive numbers;
-    else if (index === setArray.length - 2 && setArray[index] === setArray[index + 1].id - 1) {
+    if (index === setArray.length - 2 && setArray[index].id === setArray[index + 1].id - 1) {
       validSetArray.push(setArray[index]);
       validSetArray.push(setArray[index + 1]);
       console.log("1");
@@ -146,6 +168,9 @@ function validSet(setArray) {
 }
 
 
+
+
+
 // returns array of arrays including all possible set combinations.
 function possibleSetCombinations(playerDeck) {
   const suits = ['heart', 'diamond', 'club', 'spade'];
@@ -158,11 +183,13 @@ function possibleSetCombinations(playerDeck) {
     switch (jokerCounter) {
       case 2:
         if (suitArr.length > 0) {
+          suitArr.push(...jokerArr);
           setsCombinations.push(suitArr);
         }
         break;
       case 1:
         if (suitArr.length > 1) {
+          suitArr.push(...jokerArr);
           setsCombinations.push(suitArr);
         }
       default:
