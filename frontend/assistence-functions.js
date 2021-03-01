@@ -79,169 +79,101 @@ function updatePlayersCardsCounter(gameControl) {
   }
 }
 
-function validationCaseOne(chosenCards, card) {
-  // same rank
-  if (card.rank === chosenCards[0].rank) {
-    return true;
-    // consecutive numbers with the same sign
-  } else if ((
-    card.id === chosenCards[0].id + 1 ||
-    card.id === chosenCards[0].id - 1) &&
-    card.suit === chosenCards[0].suit) {
-    return true;
-  } else {
-    return false;
-  }
-}
-// // true
-//   - same id
-//   - continue to be consectuive numbers with the same sign
 
-function validationCaseTwo(chosenCards, card) {
-  // if the user clicked on two cards with the same number
-  if (chosenCards[0].rank === chosenCards[1].rank) {
-    // if the card is the same number as the other two chosens
-    if (card.rank === chosenCards[0].rank) {
-      return true;
-    } else {
-      return false;
-    }
-    // the two chosen cards are same suit and consecutive
-  } else {
-    // card has the same suit as the other two
-    if (card.suit === chosenCards[0].suit) {
-      // card is continuing consecutive numbers
-      if (
-        card.id === chosenCards[0].id + 1 ||
-        card.id === chosenCards[0].id - 1 ||
-        card.id === chosenCards[1].id + 1 ||
-        card.id === chosenCards[1].id - 1
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-
-
-}
-
-// true
-// - same id
-// - continue to be consectuive numbers with the same sign
-
-function validationCaseThree(chosenCards, card) {
-  // enough to know that the third one is also equal 
-  if (chosenCards[0].rank === chosenCards[1].rank) {
-    if (card.rank === chosenCards[0].rank) {
-      return true;
-    } else {
-      return false;
-    }
-    // the cards selected are for sure a set of consecutive cards
-  } else {
-    // check if the card has the same suit
-    if (card.suit === chosenCards[0].suit) {
-      if (
-        card.id === chosenCards[0].id + 1 ||
-        card.id === chosenCards[0].id - 1 ||
-        card.id === chosenCards[1].id + 1 ||
-        card.id === chosenCards[1].id - 1 ||
-        card.id === chosenCards[2].id + 1 ||
-        card.id === chosenCards[2].id - 1
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-}
-// true
-// - same id
-// - continue to be consectuive numbers with the same sign
-
-function validationCaseFour(chosenCards, card) {
-  // the chosen cards must be consectiutive numbers with the same sign
-  if (card.suit === chosenCards[0].suit) {
-    if (
-      card.id === chosenCards[0].id + 1 ||
-      card.id === chosenCards[0].id - 1 ||
-      card.id === chosenCards[1].id + 1 ||
-      card.id === chosenCards[1].id - 1 ||
-      card.id === chosenCards[2].id + 1 ||
-      card.id === chosenCards[2].id - 1 ||
-      card.id === chosenCards[3].id + 1 ||
-      card.id === chosenCards[3].id - 1
-    ) {
-      return true;
-    }
-  } return false;
-}
-
-// Need to figure out how to get the playerDeck
-// need to add property to card that override chosen
-function asyncValidationCase(playerDeck) {
-  const setArray = getArrayWithHighestAppearance(playerDeck);
-  console.log("after getArray...", setArray);
-  // no sufficient suit apearances
-  if (!setArray) {
+// returns all possible valid sets from the player deck
+function allValidPossibleSets(playerDeck) {
+  const setsCombinations = possibleSetCombinations(playerDeck);
+  console.log(setsCombinations);
+  if (!setsCombinations) {
     return;
-    // array of cards that can possibly make a set
-    // Checks that for every number in the array there is a consecutive number
   } else {
-
-    setArray.sort((a, b) => {
-      return a.id - b.id;
-    });
-    console.log("after sort");
-    let temp = [];
-    // [1,0,3,4,7]
-    for (let index = 0; index < setArray.length - 1; index++) {
-      if (index === setArray.length - 2 && setArray[index] === setArray[index + 1].id - 1) {
-        temp.push(setArray[index]);
-        temp.push(setArray[index + 1]);
-        console.log("1");
+    const validSets = [];
+    for (const set of setsCombinations) {
+      const validSetArray = validSet(set);
+      if (validSetArray) {
+        validSets.push(validSetArray);
       }
-      else if (setArray[index].id === setArray[index + 1].id - 1) {
-        temp.push(setArray[index]);
-        console.log("2");
-      }
-      else {
-        if (temp.length > 1 && setArray[index - 1].id === setArray[index].id - 1) {
-          temp.push(setArray[index]);
-          console.log("4");
-          break;
-        }
-        else if (temp.length < 3) {
-          temp = [];
-          console.log("3");
-        }
-
-      }
-
     }
-    console.log(temp.length, "before return");
-    return temp.length > 2 ? temp : false;
-
-    // make this cards override prop make sure to remove the overide
+    console.log(validSets);
+    return validSets;
   }
 }
 
-// returns array with the highest suit appearances or -1 it didnt find one with more than 3 apearances
-// case of jokers need to return all the possible arrays 
-function getArrayWithHighestAppearance(playerDeck) {
-  const suits = ['heart', 'diamond', 'club', 'spade'];
-  for (const suit of suits) {
-    const jokerArr = playerDeck.filter((card) => { return card.id === 0 });
-    const suitArr = playerDeck.filter((card) => { return card.suit === suit });
-    if (jokerArr) {
-      suitArr.push(...jokerArr);
+// returns a set only if valid, if not returns false
+function validSet(setArray) {
+  console.log(setArray);
+  setArray.sort((a, b) => {
+    return a.id - b.id;
+  });
+  let jokerCounter = 0;
+  console.log("after sort", setArray);
+  let validSetArray = [];
+  // [1,0,3,4,7]
+  for (let index = 0; index < setArray.length - 1; index++) {
+    // counts the jokers
+    if (setArray[index].id === 0) {
+      jokerCounter++;
+      console.log(jokerCounter);
+      continue;
     }
-    if (suitArr.length > 2) return suitArr;
+    // pushes the last cell of setArry if part of consecutive numbers;
+    else if (index === setArray.length - 2 && setArray[index] === setArray[index + 1].id - 1) {
+      validSetArray.push(setArray[index]);
+      validSetArray.push(setArray[index + 1]);
+      console.log("1");
+    }
+    //  pushes the part of set Array if part of consecutive numbers;
+    else if (setArray[index].id === setArray[index + 1].id - 1) {
+      validSetArray.push(setArray[index]);
+      console.log("2");
+    }
+    else {
+      // pushes the last consecutive number and breaks if the length is sufficient 
+      if (validSetArray.length > 1 && setArray[index - 1].id === setArray[index].id - 1) {
+        validSetArray.push(setArray[index]);
+        console.log("4");
+        break;
+      }
+      // resets validSetArray if the sequence is smaller then 3
+      else if (validSetArray.length < 3) {
+        validSetArray = [];
+        console.log("3");
+      }
+
+    }
+  }
+  return validSetArray.length > 2 ? validSetArray : false;
+}
+
+
+// returns array of arrays including all possible set combinations.
+function possibleSetCombinations(playerDeck) {
+  const suits = ['heart', 'diamond', 'club', 'spade'];
+  const setsCombinations = [];
+
+  const jokerArr = playerDeck.filter((card) => { return card.id === 0 });
+  const jokerCounter = jokerArr.length;
+  for (const suit of suits) {
+    const suitArr = playerDeck.filter((card) => { return card.suit === suit });
+    switch (jokerCounter) {
+      case 2:
+        if (suitArr.length > 0) {
+          setsCombinations.push(suitArr);
+        }
+        break;
+      case 1:
+        if (suitArr.length > 1) {
+          setsCombinations.push(suitArr);
+        }
+      default:
+        if (suitArr.length > 2) {
+          setsCombinations.push(suitArr);
+        }
+        break;
+    }
   }
 
-  return false;
+  return setsCombinations.length > 0 ? setsCombinations : false;
 }
 
 export {
@@ -254,11 +186,8 @@ export {
   createPlayerPositions,
   switchTurn,
   updatePlayersCardsCounter,
-  validationCaseOne,
-  validationCaseTwo,
-  validationCaseThree,
-  validationCaseFour,
-  asyncValidationCase,
-  getArrayWithHighestAppearance
+  validSet,
+  allValidPossibleSets,
+  possibleSetCombinations
 };
 

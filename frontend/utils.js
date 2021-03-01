@@ -1,5 +1,5 @@
 import { Deck, Player, PileDeck, TableDeck, Card } from './export-tomain.js';
-import { hidWelcomePage, randomOrderArray, catchElement, newElement, guessACard, getCheckedAvatar, switchTurn, updatePlayersCardsCounter, validationCaseOne, validationCaseTwo, validationCaseThree, validationCaseFour, asyncValidationCase } from './assistence-functions.js';
+import { hidWelcomePage, randomOrderArray, catchElement, newElement, guessACard, getCheckedAvatar, switchTurn, allValidPossibleSets } from './assistence-functions.js';
 
 
 // Event Listeners:
@@ -142,11 +142,13 @@ function renderWelcomePagePlayers(player) {
 
 function createDesk(gameControl) {
   const deskContainer = catchElement("desk-container");
-  const pileDeck = newElement("div", "pile-deck", null, deskContainer);
-  pileDeck.innerText = gameControl.pileDeck.cards[
-    gameControl.pileDeck.cards.length - 1
-  ].cardName();
-  pileDeck.style.color = "white";
+  // const pileDeck = newElement("div", "pile-deck", null, deskContainer);
+  const pileDeck = newElement("img", "player-card", null, deskContainer);
+  pileDeck.classList.add("pile-deck");
+  const card = gameControl.pileDeck.cards[gameControl.pileDeck.cards.length - 1];
+  pileDeck.setAttribute("src", `./assets/cards/${card.cardName()}.png`);
+
+
   const tableDeck = newElement("div", "table-deck", null, deskContainer);
   pileDeck.addEventListener("click", (event) => {
     for (const player of gameControl.players) {
@@ -380,8 +382,6 @@ function setNewFirstTurn(gameControl) {
   winner.turn = true;
 }
 
-export { addPlayer, getCheckedAvatar, renderWelcomePagePlayers, guessACard, startGame, createDesk, renderBoard, createPlayerDiv, updateScoreTable, newRoundDealing };
-// chosenCards[0].rank is not a property (chosen cards[0] is an element)
 
 function checkValidChoose(card, playerDeck) {
   // check if the click was on a chosen card
@@ -392,39 +392,38 @@ function checkValidChoose(card, playerDeck) {
     return card.chosen;
   });
 
-  const set = asyncValidationCase(playerDeck);
-  if (set) {
-    console.log("set " + set);
-    // create a flag maybe;
-    // 2
-    console.log(typeof (set));
-    console.log("if " + set.includes(card));
-    if (set.includes(card)) {
-      for (const chosenCard of chosenCards) {
-        if (!set.includes(chosenCard)) {
-          return false;
-        }
-      }
-      return true;
-    }
-  } else {
-  }
-
+  // change completely ( take from validationCaseFour)
   if (chosenCards.length === 0) {
     return true;
-  } else if (chosenCards.length === 1) {
-    // console.log("1 card selected");
-    return validationCaseOne(chosenCards, card);
-  } else if (chosenCards.length === 2) {
-    // console.log("2 card selected");
-    return validationCaseTwo(chosenCards, card);
-  } else if (chosenCards.length === 3) {
-    // console.log("3 card selected");
-    return validationCaseThree(chosenCards, card);
-  } else if (chosenCards.length === 4) {
-    // console.log("4 card selected");
-    return validationCaseFour(chosenCards, card);
-  } else {
-    // console.log("else selected");
+  } else if (card.rank === chosenCards[0].rank) {
+    return true;
   }
+
+
+
+  // checks whether the card exists in one of the possible sets
+  const setsArray = allValidPossibleSets(playerDeck);
+  if (!setsArray) {
+    return false;
+  }
+  console.log(setsArray);
+  for (const set of setsArray) {
+    if (set) {
+      console.log("set " + set);
+      // create a flag maybe;
+      // 2
+      console.log(typeof (set));
+      console.log("if " + set.includes(card));
+      if (set.includes(card)) {
+        for (const chosenCard of chosenCards) {
+          if (!set.includes(chosenCard)) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+  }
+  return false;
 }
+export { addPlayer, getCheckedAvatar, renderWelcomePagePlayers, guessACard, startGame, createDesk, renderBoard, createPlayerDiv, updateScoreTable, newRoundDealing };
