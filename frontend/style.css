@@ -11,6 +11,12 @@ body {
   overflow: hidden;
 }
 
+#start-new-game {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
 #form-background {
   position: absolute;
   background-image: url(./assets/palm-trees-on-white-beach.jpg);

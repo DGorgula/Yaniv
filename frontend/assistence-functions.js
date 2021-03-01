@@ -123,6 +123,8 @@ function validationCaseTwo(chosenCards, card) {
     return false;
   }
 
+
+
 }
 
 // true

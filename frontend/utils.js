@@ -9,13 +9,57 @@ function yanivListener(gameControl) {
   theWinnerIs(gameControl);
   updateScoreTable(gameControl);// how is the winner , giving score , update
   renderScoreTable(gameControl); /// present the winner and the table
+  const endGame = playersOver200Out(gameControl);
+  if (endGame === "endGame") {
+    return;
+  }
   setNewFirstTurn(gameControl);// first player turn 
-  debugger;
   setTimeout(() => {
+
     newRoundDealing(gameControl);//sets the desk for new round
     // updatePlayersCardsCounter(gameControl); fixed in the newRoundDealing func ^^
-  }, 7000);
+  }, 5);
 }
+
+function playersOver200Out(gameControl) {
+  const players = gameControl.players;
+  const tableScore = gameControl.tableScore;
+  const playersLength = players.length;
+  let looserPlayers = [];
+  for (let i = 0; i < playersLength; i++) {
+    if (players[i].score > 200) {
+      looserPlayers.push(i);
+      console.log("player loos");
+    }
+    else if (players[i].score === 200) {
+      players[i].score = 0;
+      tableScore.total[players[i].name] = 0
+    }
+  }
+  looserPlayers.sort((a, b) => { return b - a });
+  console.log(looserPlayers, players);
+
+  for (const i of looserPlayers) {
+    players.splice(i, 1);
+  }
+  console.log(looserPlayers, players);
+
+  if (players.length === 1) {
+    endGame(gameControl);
+    debugger;
+    // setTimeout(location.reload, 7000);
+    setTimeout(() => { document.location.reload(true) }, 20000);
+    return "endGame"
+  }
+  return looserPlayers;
+}
+
+function endGame(gameControl) {
+  const gameWinner = gameControl.players[0].name;
+  const deskContainer = catchElement("desk-container");
+  newElement('div', null, `The Winner is ${gameWinner}!`, deskContainer, "game-winner-div");
+}
+
 
 function theWinnerIs(gameControl) {
   const players = gameControl.players;
