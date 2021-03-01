@@ -1,8 +1,5 @@
-/** @format */
-/** @format */
+@import url("https://fonts.googleapis.com/css?family=Libre+Caslon+Text:400,700&display=swap");
 
-// $playerContainerHeigth = 3rem;
-// $gridHeight: 4.5rem;
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +8,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  font-family: arvo;
 }
 #start-new-game {
   position: absolute;
@@ -33,7 +31,7 @@ body {
   #form-container {
     background-color: rgba(255, 255, 255, 0.3);
     width: 50%;
-    height: 55%;
+    height: 42%;
     margin: auto;
     z-index: 2;
     display: flex;
@@ -52,13 +50,71 @@ body {
       width: 100%;
       align-items: center;
     }
+
+    #players-container {
+      margin-top: 9rem;
+      display: flex;
+      flex-direction: row;
+
+      .welcome-player-div {
+        font-size: 20px;
+        margin: 0 2rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        // color: white;
+        // background-color: rgba(255, 255, 255, 0.3);
+      }
+      .welcome-player-div span {
+        padding: 0 20px;
+      }
+    }
   }
+}
+.nameInput {
+  background-image: url(./assets/WfuIXF.gif);
+  background-size: cover;
+  background-position: center;
+  border: 0;
+  outline: 4px solid transparent;
+  font-size: 20px;
+  font-family: arvo;
+  height: 3rem;
+  width: 20rem;
+  color: black;
+  margin: 10px 0;
+}
+
+.nameInput:hover,
+.nameInput:focus {
+  outline-color: whitesmoke;
+}
+
+.buttons {
+  width: 20rem;
+  height: 2rem;
+  color: white;
+  background-color: rgb(199, 194, 194);
+  font-size: 18px;
+  margin-top: 5px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+}
+.buttons:active {
+  box-shadow: 0 2px rgb(80, 80, 45);
+  transform: translateY(4px);
 }
 
 #desk-container {
-  background-color: #ebc580;
+  // background-color: #ebc580;
+  background-image: url(./assets/table.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   display: grid;
-  grid-template-columns: 9rem 10fr 5fr 2fr 9rem;
+  grid-template-columns: 13rem 6fr 5fr 2fr 13rem;
   grid-template-rows: 9rem 2fr 9rem 2fr 9rem;
   position: relative;
   width: 100%;
@@ -70,34 +126,56 @@ body {
   }
 
   .yaniv-before-button {
-    background-image: url(./assets/yanibefore.jpeg);
+    // background-image: url(./assets/yanibefore.jpeg);
+    background-image: url("./assets/yanivgreen.jpeg");
+    background-position: center;
     background-size: cover;
-    width: 100%;
-    height: 100%;
-    grid-row: 5;
-    grid-column: 5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    height: 10%;
+    outline: none;
   }
 
   .yaniv {
-    background-image: url(./assets/yaniv.jpeg);
+    // background-image: url(./assets/yaniv.jpeg);
+    background-image: url("./assets/yanivBa.jpeg");
     background-size: cover;
-    width: 100%;
-    height: 100%;
-    grid-row: 5;
-    grid-column: 5;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    height: 10%;
   }
+}
+#card-sentence {
+  grid-row: 4;
+  grid-column: 2/4;
+  color: white;
+}
+
+#desk-div {
+  grid-row: 3;
+  grid-column: 2/4;
+  display: flex;
+  flex-direction: row;
+  border-style: double;
+  border-width: 4px;
+  border-color: white;
+  border-radius: 20px;
+  height: 100%;
 
   .pile-deck {
     margin-right: 1rem;
     background-image: url(./assets/gray_back.png);
     background-size: cover;
     width: 6rem;
-    height: 9rem;
+    height: 100%;
     display: flex;
     justify-content: center;
-    grid-column: 2/3;
     margin: 0 auto;
-    grid-row: 3;
   }
 
   .table-deck {
@@ -105,15 +183,14 @@ body {
     background-image: url(./assets/gray_back.png);
     background-size: cover;
     width: 6rem;
-    height: 9rem;
+    height: 100%;
     display: flex;
     margin: 0 auto;
-    grid-column: 3/4;
-    grid-row: 3;
   }
 }
+
 .player-profile {
-  background-color: yellow;
+  // background-color: yellow;
   display: flex;
 }
 .current-player,
@@ -136,25 +213,24 @@ body {
 }
 
 .current-player {
-  background-color: brown;
+  // background-color: rgb(11, 124, 11);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   grid-column: 2/5;
-  grid-row: 5/6;
+  grid-row: 6;
 
   .cards-sum-span {
-    background-color: orange;
+    background-color: rgb(180, 143, 75);
     display: flex;
     align-content: center;
-    padding: 0.5rem;
     margin-left: 0.5rem;
   }
   .player-deck {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
   .player-card {
     width: 10%;
@@ -163,50 +239,51 @@ body {
 }
 
 .left-player {
-  background-color: brown;
+  // background-color: brown;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   grid-column: 1;
-  grid-row: 2/5;
+  grid-row: 1/5;
   .cards-sum-span {
     background-color: orange;
     display: flex;
     align-self: center;
-    padding: 0.5rem;
     margin-top: 0.5rem;
   }
   .player-deck {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
   }
   .player-card {
     transform: rotate(90deg);
-    margin-left: 3rem;
-    width: 36%;
+    margin-left: 1.5rem;
+    width: 48%;
+    grid-column: 1;
+    grid-row: 1/6;
   }
 }
 
 .top-player {
-  background-color: brown;
+  // background-color: brown;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   grid-column: 2/5;
-  grid-row: 1/2;
+  grid-row: 1;
 
   .cards-sum-span {
     background-color: orange;
     display: flex;
     align-content: center;
-    padding: 0.5rem;
-    margin-right: 0.5rem;
+    margin-right: 0.7rem;
   }
   .player-deck {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
   .player-card {
     width: 10%;
@@ -214,28 +291,30 @@ body {
   }
 }
 .right-player {
-  background-color: brown;
+  // background-color: brown;
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
   grid-column: 5;
-  grid-row: 2/5;
+  grid-row: 3/7;
 
   .cards-sum-span {
     background-color: orange;
     display: flex;
     align-self: center;
-    padding: 0.5rem;
     margin-bottom: 0.5rem;
   }
   .player-deck {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
   }
   .player-card {
     transform: rotate(90deg);
-    margin-left: 3rem;
-    width: 36%;
+    margin-left: 1.5rem;
+    width: 48%;
+    grid-column: 5;
+    grid-row: 1/6;
   }
 }
 
@@ -321,45 +400,200 @@ body {
   border-radius: 10px;
 }
 
-.nameInput {
-  background-image: url(./assets/WfuIXF.gif);
-  background-size: cover;
-  background-position: center;
-  border: 0;
-  outline: 4px solid transparent;
+.menu-icon {
+  position: absolute;
+  z-index: 1;
+  top: 5vh;
+  left: 5vw;
+  padding-bottom: 2vh;
+
+  span {
+    height: 5px;
+    width: 40px;
+    background-color: white;
+    display: block;
+    margin: 5px 0px 5px 0px;
+    transition: 0.7s ease-in-out;
+    transform: none;
+  }
+}
+
+#openmenu:checked ~ .menu-pane {
+  left: -5vw;
+  transform: translateX(-5vw);
+}
+
+#openmenu:checked ~ .menu-icon span:nth-of-type(2) {
+  transform: translate(0%, 175%) rotate(-45deg);
+  background-color: white;
+}
+
+#openmenu:checked ~ .menu-icon span:nth-of-type(3) {
+  transform: rotate(45deg);
+  background-color: white;
+}
+
+#openmenu:checked ~ .menu-icon span:nth-of-type(1) {
+  opacity: 0;
+}
+
+#openmenu:checked ~ .menu-icon span:nth-of-type(4) {
+  opacity: 0;
+}
+input.menu-checkbox {
+  position: absolute;
+  z-index: 3;
+  top: 5vh;
+  left: 5vw;
+  width: 10vw;
+  opacity: 0;
+  height: 6vh;
+}
+
+.menu-pane {
+  background-color: lightblue;
+  position: absolute;
+  transform: translateX(-105vw);
+  transform-origin: (0, 0);
+  width: 35vw;
+  height: 100%;
+  transition: 0.6s ease-in-out;
+  justify-content: center;
+}
+
+nav {
+  &.primary-navigation {
+    margin: 0 auto;
+    padding: 120px 0 0 0;
+    text-align: center;
+    font-size: 20px;
+
+    ul li {
+      list-style: none;
+      margin: 0 auto;
+      border-left: 2px solid #3ca0e7;
+      padding: 20px 30px;
+      position: relative;
+      text-decoration: none;
+      text-align: center;
+      font-family: arvo;
+    }
+
+    li a {
+      color: black;
+    }
+
+    li a:hover {
+      color: #3ca0e7;
+    }
+
+    li:hover {
+      cursor: pointer;
+    }
+
+    ul li ul {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      left: 0;
+      display: none;
+      background: white;
+    }
+
+    ul li:hover > ul,
+    ul li ul:hover {
+      visibility: visible;
+      opacity: 1;
+      display: block;
+      min-width: 250px;
+      text-align: left;
+      box-shadow: 0px 3px 5px -1px #ccc;
+    }
+
+    ul li ul li {
+      clear: both;
+      width: 100%;
+      text-align: center;
+      // margin-bottom: 20px;
+      border-style: none;
+    }
+
+    ul li ul li a:hover {
+      padding-left: 10px;
+      border-left: 2px solid #3ca0e7;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    color: #3ca0e7;
+  }
+}
+
+ul li ul li a {
+  transition: all 0.5s ease;
+}
+
+.menu-button {
+  background-color: lightblue;
   font-size: 20px;
-  height: 3rem;
-  width: 20rem;
-  color: black;
-  margin: 10px 0;
-}
-
-.nameInput:hover,
-.nameInput:focus {
-  outline-color: whitesmoke;
-}
-
-.welcome-player-div {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-.welcome-player-div span {
-  padding-left: 20px;
-  margin-right: 10px;
-}
-
-button {
-  width: 20rem;
-  height: 2rem;
-  color: white;
-  background-color: rgb(199, 194, 194);
-  font-size: 18px;
   margin-top: 5px;
   border: 2px solid transparent;
-  border-radius: 10px;
   outline: none;
+  font-family: arvo;
 }
-button:active {
-  box-shadow: 0 2px rgb(80, 80, 45);
-  transform: translateY(4px);
+
+#footer {
+  background-color: rgb(55, 125, 148);
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  height: 2rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  color: black;
+}
+
+#game-rules-div {
+  display: none;
+  position: fixed;
+  background-image: url(./assets/tropical-summer-beach-art-templates.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+  overflow: scroll;
+  text-align: center;
+
+  h1 {
+    text-align: center;
+    font-size: 45px;
+    padding-top: 1rem;
+  }
+  h2 {
+    padding-top: 1rem;
+    font-size: 30px;
+  }
+  p {
+    padding-top: 1rem;
+    font-size: 20px;
+  }
+  #exit-button {
+    width: 70px;
+    height: 40px;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }

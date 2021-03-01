@@ -1,24 +1,32 @@
-import { Deck, Player, PileDeck, TableDeck, Card } from './export-tomain.js';
-import { hidWelcomePage, randomOrderArray, catchElement, newElement, guessACard, getCheckedAvatar, switchTurn, allValidPossibleSets } from './assistence-functions.js';
-
+import { Deck, Player, PileDeck, TableDeck, Card } from "./export-tomain.js";
+import {
+  hidWelcomePage,
+  randomOrderArray,
+  catchElement,
+  newElement,
+  guessACard,
+  getCheckedAvatar,
+  switchTurn,
+  allValidPossibleSets,
+} from "./assistence-functions.js";
 
 // Event Listeners:
 
 function yanivListener(gameControl) {
-  yanivRender(gameControl);///reveld cards , 
+  yanivRender(gameControl); ///reveld cards ,
   theWinnerIs(gameControl);
-  updateScoreTable(gameControl);// how is the winner , giving score , update
+  updateScoreTable(gameControl); // how is the winner , giving score , update
   renderScoreTable(gameControl); /// present the winner and the table
+
   const endGame = playersOver200Out(gameControl);
   if (endGame === "endGame") {
     return;
   }
-  setNewFirstTurn(gameControl);// first player turn 
+  setNewFirstTurn(gameControl); // first player turn
   setTimeout(() => {
-
-    newRoundDealing(gameControl);//sets the desk for new round
+    newRoundDealing(gameControl); //sets the desk for new round
     // updatePlayersCardsCounter(gameControl); fixed in the newRoundDealing func ^^
-  }, 5);
+  }, 5000);
 }
 
 function playersOver200Out(gameControl) {
@@ -30,13 +38,14 @@ function playersOver200Out(gameControl) {
     if (players[i].score > 200) {
       looserPlayers.push(i);
       console.log("player loos");
-    }
-    else if (players[i].score === 200) {
+    } else if (players[i].score === 200) {
       players[i].score = 0;
-      tableScore.total[players[i].name] = 0
+      tableScore.total[players[i].name] = 0;
     }
   }
-  looserPlayers.sort((a, b) => { return b - a });
+  looserPlayers.sort((a, b) => {
+    return b - a;
+  });
   console.log(looserPlayers, players);
 
   for (const i of looserPlayers) {
@@ -48,8 +57,10 @@ function playersOver200Out(gameControl) {
     endGame(gameControl);
     debugger;
     // setTimeout(location.reload, 7000);
-    setTimeout(() => { document.location.reload(true) }, 20000);
-    return "endGame"
+    setTimeout(() => {
+      document.location.reload(true);
+    }, 20000);
+    return "endGame";
   }
   return looserPlayers;
 }
@@ -57,24 +68,29 @@ function playersOver200Out(gameControl) {
 function endGame(gameControl) {
   const gameWinner = gameControl.players[0].name;
   const deskContainer = catchElement("desk-container");
-  newElement('div', null, `The Winner is ${gameWinner}!`, deskContainer, "game-winner-div");
+  newElement(
+    "div",
+    null,
+    `The Winner is ${gameWinner}!`,
+    deskContainer,
+    "game-winner-div"
+  );
 }
-
 
 function theWinnerIs(gameControl) {
   const players = gameControl.players;
   const YanivPlayer = gameControl.yanivDeclaration;
   let lowerScore = YanivPlayer.cardsSum;
-  let winningType = 'Yaniv';
+  let winningType = "Yaniv";
   let winnerPlayer = YanivPlayer;
   // console.log(players);
   // console.log(winnerPlayer + "declaer yaniv");
   for (const player of players) {
     if (player !== YanivPlayer && player.cardsSum <= lowerScore) {
       lowerScore = player.cardsSum;
-      winningType = 'Asaf';
-      winnerPlayer = player;///maybe to set yaniv decleration to asaf here
-      YanivPlayer.cardsSum = 30;    // make the Yaniv declarator pay!!
+      winningType = "Asaf";
+      winnerPlayer = player; ///maybe to set yaniv decleration to asaf here
+      YanivPlayer.cardsSum = 30; // make the Yaniv declarator pay!!
       // console.log("asaf" + winnerPlayer);
     }
   }
@@ -120,14 +136,9 @@ function renderWelcomePagePlayers(player) {
   const playerContainer = document.getElementById("players-container");
   const playerName = player.name;
   const playerAvatar = player.avatar;
-  const playerId = player.id;
 
   const div = document.createElement("div");
   div.classList.add("welcome-player-div");
-
-  const elemnentIndex = document.createElement("span");
-  elemnentIndex.innerText = playerId;
-  div.appendChild(elemnentIndex);
 
   const elementPlayerName = document.createElement("span");
   elementPlayerName.innerText = playerName;
@@ -143,13 +154,14 @@ function renderWelcomePagePlayers(player) {
 function createDesk(gameControl) {
   const deskContainer = catchElement("desk-container");
   // const pileDeck = newElement("div", "pile-deck", null, deskContainer);
-  const pileDeck = newElement("img", "player-card", null, deskContainer);
+  const deskDiv = newElement("div", null, null, deskContainer, "desk-div");
+  const pileDeck = newElement("img", "player-card", null, deskDiv);
   pileDeck.classList.add("pile-deck");
-  const card = gameControl.pileDeck.cards[gameControl.pileDeck.cards.length - 1];
+  const card =
+    gameControl.pileDeck.cards[gameControl.pileDeck.cards.length - 1];
   pileDeck.setAttribute("src", `./assets/cards/${card.cardName()}.png`);
+  const tableDeck = newElement("div", "table-deck", null, deskDiv);
 
-
-  const tableDeck = newElement("div", "table-deck", null, deskContainer);
   pileDeck.addEventListener("click", (event) => {
     for (const player of gameControl.players) {
       if (player.turn) {
@@ -231,12 +243,27 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
 
   const deskContainer = catchElement("desk-container");
 
-  const playerContainer = newElement("div", "player-container", null, deskContainer);
+  const playerContainer = newElement(
+    "div",
+    "player-container",
+    null,
+    deskContainer
+  );
   playerContainer.classList.add(playerPosition);
 
-  const playerProfile = newElement("div", "player-profile", null, playerContainer);
+  const playerProfile = newElement(
+    "div",
+    "player-profile",
+    null,
+    playerContainer
+  );
   newElement("span", "name-span", playerName, playerProfile);
-  newElement("span", `avatar-img${playerAvatar.slice(-1)}`, null, playerProfile);
+  newElement(
+    "span",
+    `avatar-img${playerAvatar.slice(-1)}`,
+    null,
+    playerProfile
+  );
   newElement("span", "score-span", playerScore, playerProfile);
   newElement("span", "id-span", playerId, playerContainer);
 
@@ -255,7 +282,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
       // yanivButton.classList.remove('yaniv');
       yanivButton.classList.add("yaniv-before-button");
     }
-    newElement('span', 'cards-sum-span', playerCardsSum, playerContainer);
+    newElement("span", "cards-sum-span", playerCardsSum, playerContainer);
     const playerCards = newElement("div", "player-deck", null, playerContainer);
     for (let card of playerDeck) {
       const newCardElement = document.createElement("img");
@@ -264,7 +291,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
         `./assets/cards/${card.cardName()}.png`
       );
       newCardElement.classList.add("player-card");
-      newCardElement.addEventListener('click', (e) => {
+      newCardElement.addEventListener("click", (e) => {
         if (checkValidChoose(card, playerDeck)) {
           card.chooseToggle(newCardElement);
         }
@@ -296,8 +323,6 @@ function updateScoreTable(gameControl) {
     scoreTable.currentRound[player.name] = player.cardsSum;
   }
 }
-
-
 
 // sets the board to a new round
 function newRoundDealing(gameControl) {
@@ -355,8 +380,20 @@ function renderScoreTable(gameControl) {
   for (const player of players) {
     const playerTotalScore = gameControl.scoreTable.total[player.name];
     const playerRoundScore = gameControl.scoreTable.currentRound[player.name];
-    newElement('h1', 'total-element', `${player.name} total score: ${playerTotalScore}`, div, null);
-    newElement('h1', 'current-element', `${player.name} current score: ${playerRoundScore}`, div, null);
+    newElement(
+      "h1",
+      "total-element",
+      `${player.name} total score: ${playerTotalScore}`,
+      div,
+      null
+    );
+    newElement(
+      "h1",
+      "current-element",
+      `${player.name} current score: ${playerRoundScore}`,
+      div,
+      null
+    );
   }
 }
 
@@ -382,7 +419,6 @@ function setNewFirstTurn(gameControl) {
   winner.turn = true;
 }
 
-
 function checkValidChoose(card, playerDeck) {
   // check if the click was on a chosen card
   if (card.chosen) {
@@ -399,8 +435,6 @@ function checkValidChoose(card, playerDeck) {
     return true;
   }
 
-
-
   // checks whether the card exists in one of the possible sets
   const setsArray = allValidPossibleSets(playerDeck);
   if (!setsArray) {
@@ -412,7 +446,7 @@ function checkValidChoose(card, playerDeck) {
       console.log("set " + set);
       // create a flag maybe;
       // 2
-      console.log(typeof (set));
+      console.log(typeof set);
       console.log("if " + set.includes(card));
       if (set.includes(card)) {
         for (const chosenCard of chosenCards) {
@@ -426,4 +460,15 @@ function checkValidChoose(card, playerDeck) {
   }
   return false;
 }
-export { addPlayer, getCheckedAvatar, renderWelcomePagePlayers, guessACard, startGame, createDesk, renderBoard, createPlayerDiv, updateScoreTable, newRoundDealing };
+export {
+  addPlayer,
+  getCheckedAvatar,
+  renderWelcomePagePlayers,
+  guessACard,
+  startGame,
+  createDesk,
+  renderBoard,
+  createPlayerDiv,
+  updateScoreTable,
+  newRoundDealing,
+};
