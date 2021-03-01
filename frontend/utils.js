@@ -1,18 +1,31 @@
-import { Deck, Player, PileDeck, TableDeck, Card } from './export-tomain.js';
-import { hidWelcomePage, randomOrderArray, catchElement, newElement, guessACard, getCheckedAvatar, switchTurn, updatePlayersCardsCounter, validationCaseOne, validationCaseTwo, validationCaseThree, validationCaseFour, asyncValidationCase } from './assistence-functions.js';
-
+import { Deck, Player, PileDeck, TableDeck, Card } from "./export-tomain.js";
+import {
+  hidWelcomePage,
+  randomOrderArray,
+  catchElement,
+  newElement,
+  guessACard,
+  getCheckedAvatar,
+  switchTurn,
+  updatePlayersCardsCounter,
+  validationCaseOne,
+  validationCaseTwo,
+  validationCaseThree,
+  validationCaseFour,
+  asyncValidationCase,
+} from "./assistence-functions.js";
 
 // Event Listeners:
 
 function yanivListener(gameControl) {
-  yanivRender(gameControl);///reveld cards , 
+  yanivRender(gameControl); ///reveld cards ,
   theWinnerIs(gameControl);
-  updateScoreTable(gameControl);// how is the winner , giving score , update
+  updateScoreTable(gameControl); // how is the winner , giving score , update
   renderScoreTable(gameControl); /// present the winner and the table
-  setNewFirstTurn(gameControl);// first player turn 
+  setNewFirstTurn(gameControl); // first player turn
   debugger;
   setTimeout(() => {
-    newRoundDealing(gameControl);//sets the desk for new round
+    newRoundDealing(gameControl); //sets the desk for new round
     // updatePlayersCardsCounter(gameControl); fixed in the newRoundDealing func ^^
   }, 7000);
 }
@@ -21,16 +34,16 @@ function theWinnerIs(gameControl) {
   const players = gameControl.players;
   const YanivPlayer = gameControl.yanivDeclaration;
   let lowerScore = YanivPlayer.cardsSum;
-  let winningType = 'Yaniv';
+  let winningType = "Yaniv";
   let winnerPlayer = YanivPlayer;
   // console.log(players);
   // console.log(winnerPlayer + "declaer yaniv");
   for (const player of players) {
     if (player !== YanivPlayer && player.cardsSum <= lowerScore) {
       lowerScore = player.cardsSum;
-      winningType = 'Asaf';
-      winnerPlayer = player;///maybe to set yaniv decleration to asaf here
-      YanivPlayer.cardsSum = 30;    // make the Yaniv declarator pay!!
+      winningType = "Asaf";
+      winnerPlayer = player; ///maybe to set yaniv decleration to asaf here
+      YanivPlayer.cardsSum = 30; // make the Yaniv declarator pay!!
       // console.log("asaf" + winnerPlayer);
     }
   }
@@ -76,14 +89,9 @@ function renderWelcomePagePlayers(player) {
   const playerContainer = document.getElementById("players-container");
   const playerName = player.name;
   const playerAvatar = player.avatar;
-  const playerId = player.id;
 
   const div = document.createElement("div");
   div.classList.add("welcome-player-div");
-
-  const elemnentIndex = document.createElement("span");
-  elemnentIndex.innerText = playerId;
-  div.appendChild(elemnentIndex);
 
   const elementPlayerName = document.createElement("span");
   elementPlayerName.innerText = playerName;
@@ -185,12 +193,27 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
 
   const deskContainer = catchElement("desk-container");
 
-  const playerContainer = newElement("div", "player-container", null, deskContainer);
+  const playerContainer = newElement(
+    "div",
+    "player-container",
+    null,
+    deskContainer
+  );
   playerContainer.classList.add(playerPosition);
 
-  const playerProfile = newElement("div", "player-profile", null, playerContainer);
+  const playerProfile = newElement(
+    "div",
+    "player-profile",
+    null,
+    playerContainer
+  );
   newElement("span", "name-span", playerName, playerProfile);
-  newElement("span", `avatar-img${playerAvatar.slice(-1)}`, null, playerProfile);
+  newElement(
+    "span",
+    `avatar-img${playerAvatar.slice(-1)}`,
+    null,
+    playerProfile
+  );
   newElement("span", "score-span", playerScore, playerProfile);
   newElement("span", "id-span", playerId, playerContainer);
 
@@ -209,7 +232,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
       // yanivButton.classList.remove('yaniv');
       yanivButton.classList.add("yaniv-before-button");
     }
-    newElement('span', 'cards-sum-span', playerCardsSum, playerContainer);
+    newElement("span", "cards-sum-span", playerCardsSum, playerContainer);
     const playerCards = newElement("div", "player-deck", null, playerContainer);
     for (let card of playerDeck) {
       const newCardElement = document.createElement("img");
@@ -218,7 +241,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
         `./assets/cards/${card.cardName()}.png`
       );
       newCardElement.classList.add("player-card");
-      newCardElement.addEventListener('click', (e) => {
+      newCardElement.addEventListener("click", (e) => {
         if (checkValidChoose(card, playerDeck)) {
           card.chooseToggle(newCardElement);
         }
@@ -314,8 +337,20 @@ function renderScoreTable(gameControl) {
   for (const player of players) {
     const playerTotalScore = gameControl.scoreTable.total[player.name];
     const playerRoundScore = gameControl.scoreTable.currentRound[player.name];
-    newElement('h1', 'total-element', `${player.name} total score: ${playerTotalScore}`, div, null);
-    newElement('h1', 'current-element', `${player.name} current score: ${playerRoundScore}`, div, null);
+    newElement(
+      "h1",
+      "total-element",
+      `${player.name} total score: ${playerTotalScore}`,
+      div,
+      null
+    );
+    newElement(
+      "h1",
+      "current-element",
+      `${player.name} current score: ${playerRoundScore}`,
+      div,
+      null
+    );
   }
 }
 
@@ -341,18 +376,27 @@ function setNewFirstTurn(gameControl) {
   winner.turn = true;
 }
 
-export { addPlayer, getCheckedAvatar, renderWelcomePagePlayers, guessACard, startGame, createDesk, renderBoard, createPlayerDiv, updateScoreTable, playersCalculateFinshedRound, newRoundDealing };
-
-
-
+export {
+  addPlayer,
+  getCheckedAvatar,
+  renderWelcomePagePlayers,
+  guessACard,
+  startGame,
+  createDesk,
+  renderBoard,
+  createPlayerDiv,
+  updateScoreTable,
+  playersCalculateFinshedRound,
+  newRoundDealing,
+};
 
 // need to add joker functionality
 // fix unchoose option ??????????????????
 // fix un syncronized selections ?????????????????????
-// 
-// consecutive numbers- 
+//
+// consecutive numbers-
 //  put all cards ranks in array and look for index
-//  
+//
 // chosenCards[0].rank is not a property (chosen cards[0] is an element)
 
 function checkValidChoose(card, playerDeck) {
@@ -382,7 +426,6 @@ function checkValidChoose(card, playerDeck) {
   //     }
   //   }
   // }
-
 
   // [2, 3, 4]
   // 3, 4
