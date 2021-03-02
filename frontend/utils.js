@@ -306,7 +306,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
       newOpenedCardElement.classList.add("player-card");
       newOpenedCardElement.addEventListener("click", (e) => {
         if (checkValidChoose(card, playerDeck)) {
-          card.chooseToggle(newCardElement);
+          card.chooseToggle(newOpenedCardElement);
         }
       });
       playerCards.append(newOpenedCardElement);
@@ -353,7 +353,7 @@ function newRoundDealing(gameControl) {
   if (JSON.stringify(gameControl) === JSON.stringify({})) {
     const players = [];
     const deck = new TableDeck();
-    deck.shuffle();
+    // deck.shuffle();
     const pileDeck = new PileDeck();
     pileDeck.cards.push(deck.drawCard());
     gameControl = {
@@ -368,7 +368,7 @@ function newRoundDealing(gameControl) {
     return gameControl;
   } else {
     const deck = new TableDeck();
-    deck.shuffle();
+    // deck.shuffle();
     const pileDeck = new PileDeck();
     pileDeck.cards.push(deck.drawCard());
     gameControl.tableDeck = deck;
@@ -443,6 +443,47 @@ function setNewFirstTurn(gameControl) {
   winner.turn = true;
 }
 
+// function checkValidChoose(card, playerDeck) {
+//   // check if the click was on a chosen card
+//   if (card.chosen) {
+//     return true;
+//   }
+//   const chosenCards = playerDeck.filter((card) => {
+//     return card.chosen;
+//   });
+
+//   // change completely ( take from validationCaseFour)
+//   if (chosenCards.length === 0) {
+//     return true;
+//   } else if (card.rank === chosenCards[0].rank) {
+//     return true;
+//   }
+
+//   // checks whether the card exists in one of the possible sets
+//   const setsArray = allValidPossibleSets(playerDeck);
+//   if (!setsArray) {
+//     return false;
+//   }
+//   console.log(setsArray);
+//   for (const set of setsArray) {
+//     if (set) {
+//       console.log("set " + set);
+//       // create a flag maybe;
+//       // 2
+//       console.log(typeof set);
+//       console.log("if " + set.includes(card));
+//       if (set.includes(card)) {
+//         for (const chosenCard of chosenCards) {
+//           if (!set.includes(chosenCard)) {
+//             return false;
+//           }
+//         }
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
 function checkValidChoose(card, playerDeck) {
   // check if the click was on a chosen card
   if (card.chosen) {
@@ -451,38 +492,84 @@ function checkValidChoose(card, playerDeck) {
   const chosenCards = playerDeck.filter((card) => {
     return card.chosen;
   });
+  // can always click on joker
+  if (card.id === 0) {
+    return true;
+  }
 
   // change completely ( take from validationCaseFour)
   if (chosenCards.length === 0) {
     return true;
-  } else if (card.rank === chosenCards[0].rank) {
+  } else if (card.id === chosenCards[0].id) {
     return true;
   }
 
   // checks whether the card exists in one of the possible sets
   const setsArray = allValidPossibleSets(playerDeck);
+  console.log(setsArray);
   if (!setsArray) {
     return false;
   }
-  console.log(setsArray);
+
+
   for (const set of setsArray) {
-    if (set) {
-      console.log("set " + set);
-      // create a flag maybe;
-      // 2
-      console.log(typeof set);
-      console.log("if " + set.includes(card));
-      if (set.includes(card)) {
-        for (const chosenCard of chosenCards) {
-          if (!set.includes(chosenCard)) {
-            return false;
-          }
+    console.log("the set is:", set);
+    let flag = true;
+    // [jack, queen, joker]
+    let unchosenFlag = false;
+    for (const chosenCard of chosenCards) {
+      console.log(set.includes(chosenCard));
+      for (const card of set) {
+        if (card === chosenCard) {
+          unchosenFlag = true;
         }
-        return true;
+      }
+      console.log(unchosenFlag);
+      if (!unchosenFlag) {
+        console.log("not a set!", set, chosenCard);
+        flag = false;
+      }
+      if (flag) {
+        console.log("in the flag!");
+        if (set.includes(card)) {
+          return true;
+        }
       }
     }
   }
   return false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // console.log(setsArray);
+  // for (const set of setsArray) {
+  //   // if (set) {
+  //   // create a flag maybe;
+  //   // 2
+  //   console.log(set.includes(card), "set includes picked card", set);
+  //   if (set.includes(card)) {
+  //     for (const chosenCard of chosenCards) {
+  //       if (!set.includes(chosenCard)) {
+  //         continue;
+  //       }
+  //     }
+  //     return true;
+  //   }
+  //   // }
+  // }
+  // return false;
 }
 export {
   addPlayer,
