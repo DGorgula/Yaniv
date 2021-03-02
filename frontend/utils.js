@@ -409,34 +409,12 @@ function renderScoreTable(gameControl) {
   const totalTableRow = newElement("tr", null, null, totalTable);
   newElement("td", null, gameControl.scoreTable.roundId, totalTableRow);
 
-  for (const player in players) {
+  for (const score in gameControl.scoreTable.total) {
     newElement("td", null, player.name, totalTableRow);
     newElement("td", null, player.score, totalTableRow);
   }
 
   const div = newElement("div", null, null, deskContainer, "score-table-div");
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
-  console.log(gameControl.scoreTable);
   for (const player of players) {
     const playerTotalScore = gameControl.scoreTable.total[player.name];
     const playerRoundScore = gameControl.scoreTable.currentRound[player.name];

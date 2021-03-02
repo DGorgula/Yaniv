@@ -55,10 +55,10 @@ aboutUsButton.addEventListener("click", (event) => {});
 
 const tableScoreDiv = document.getElementById("tables");
 tableScoreButton.addEventListener("click", (event) => {
-  if (tableScoreDiv.style.display === "none") {
-    tableScoreDiv.style.display = "block";
-  } else {
+  if (tableScoreDiv.style.display === "block") {
     tableScoreDiv.style.display = "none";
+  } else {
+    tableScoreDiv.style.display = "block";
   }
 });
 // gameRulesButton.addEventListener("click", (event) => {
