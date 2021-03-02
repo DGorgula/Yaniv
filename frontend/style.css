@@ -29,10 +29,10 @@ body {
 
 #form-background #form-container {
   background-color: rgba(255, 255, 255, 0.3);
+  z-index: 3;
   width: 50%;
   height: 42%;
   margin: auto;
-  z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -828,5 +828,68 @@ ul li ul li a {
 
 .dropup:hover .dropbtn {
   background-color: black;
+}
+
+#tables {
+  display: none;
+  background-color: rgba(251, 247, 247, 0.7);
+  width: 70%;
+  height: 90%;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  z-index: 4;
+}
+
+#tables .table-header {
+  font-size: 4rem;
+}
+
+#tables .table-header2 {
+  margin: 1rem 0;
+  font-size: 3em;
+}
+
+#tables .styled-table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  font-size: 1.2em;
+  font-family: sans-serif;
+  text-align: center;
+  width: 70%;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+#tables .styled-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+}
+
+#tables .styled-table th,
+#tables .styled-table td {
+  padding: 12px 15px;
+}
+
+#tables .styled-table tbody tr {
+  background-color: rgba(255, 255, 255, 0.959);
+  z-index: 4;
+}
+
+#tables .styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+#tables .styled-table tbody tr.style-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+#first-table {
+  scroll-behavior: smooth;
+  height: 33%;
+  overflow: scroll;
 }
 /*# sourceMappingURL=style.css.map */

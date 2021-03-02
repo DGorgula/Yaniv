@@ -14,6 +14,7 @@ const startGameButton = document.getElementById("start-button");
 const startNewGameButton = document.getElementById("start-new-game");
 const gameRulesButton = document.getElementById("game-rules");
 const exitRulesButton = document.getElementById("exit-button");
+const tableScoreButton = document.getElementById("show-table-score");
 const aboutUsButton = document.getElementById("about-us");
 
 const gameControl = Functions.newRoundDealing({});
@@ -42,12 +43,29 @@ gameRulesButton.addEventListener("click", (event) => {
 });
 
 exitRulesButton.addEventListener("click", (event) => {
-  document.getElementById("game-rules-div");
-  if (document.getElementById("game-rules-div").style.display === "block") {
-    document.getElementById("game-rules-div").style.display = "none";
+  const exitButton = document.getElementById("game-rules-div");
+  if (exitButton.style.display === "block") {
+    exitButton.style.display = "none";
   } else {
-    document.getElementById("game-rules-div").style.display = "block";
+    exitButton.style.display = "block";
   }
 });
 
-aboutUsButton.addEventListener("click", (event) => { });
+aboutUsButton.addEventListener("click", (event) => {});
+
+const tableScoreDiv = document.getElementById("tables");
+tableScoreButton.addEventListener("click", (event) => {
+  if (tableScoreDiv.style.display === "none") {
+    tableScoreDiv.style.display = "block";
+  } else {
+    tableScoreDiv.style.display = "none";
+  }
+});
+// gameRulesButton.addEventListener("click", (event) => {
+//   const gameRulesDiv = document.getElementById("game-rules-div");
+//   if (gameRulesDiv.style.display === "none") {
+//     gameRulesDiv.style.display = "block";
+//   } else {
+//     gameRulesDiv.style.display = "none";
+//   }
+// });

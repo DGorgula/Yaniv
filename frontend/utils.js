@@ -277,9 +277,9 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
 
   // display only cards of the player that has the turn
   if (player.turn === true) {
-    if (playerCardsSum <= 7) {
-      // if (playerCardsSum <= 100) {
-      yanivButton.classList.remove("yaniv-before-button");
+    // if (playerCardsSum <= 7) {
+    if (playerCardsSum <= 100) {
+      // yanivButton.classList.remove("yaniv-before-button");
       yanivButton.classList.add("yaniv");
       yanivButton.addEventListener("click", () => {
         gameControl.yanivDeclaration = player;
@@ -357,8 +357,9 @@ function newRoundDealing(gameControl) {
       pileDeck: pileDeck,
       players: players,
       scoreTable: {
-        total: {},
+        roundId: {},
         currentRound: {},
+        total: {},
       },
     };
     return gameControl;
@@ -395,7 +396,46 @@ function createPlayerPositions(players) {
 function renderScoreTable(gameControl) {
   const deskContainer = document.getElementById("desk-container");
   const players = gameControl.players;
+  const roundTable = catchElement("round-scores");
+  const roundTableRow = newElement("tr", null, null, roundTable);
+  newElement("td", null, gameControl.scoreTable.roundId, roundTableRow);
+
+  for (const player in players) {
+    newElement("td", null, player.name, roundTableRow);
+    newElement("td", null, player.score, roundTableRow);
+  }
+
+  const totalTable = catchElement("total-scores");
+  const totalTableRow = newElement("tr", null, null, totalTable);
+  newElement("td", null, gameControl.scoreTable.roundId, totalTableRow);
+
+  for (const player in players) {
+    newElement("td", null, player.name, totalTableRow);
+    newElement("td", null, player.score, totalTableRow);
+  }
+
   const div = newElement("div", null, null, deskContainer, "score-table-div");
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
+  console.log(gameControl.scoreTable);
   console.log(gameControl.scoreTable);
   for (const player of players) {
     const playerTotalScore = gameControl.scoreTable.total[player.name];

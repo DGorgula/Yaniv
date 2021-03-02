@@ -24,10 +24,10 @@ body {
 
   #form-container {
     background-color: rgba(255, 255, 255, 0.3);
+    z-index: 3;
     width: 50%;
     height: 42%;
     margin: auto;
-    z-index: 3;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -634,4 +634,61 @@ ul li ul li a {
 
 .dropup:hover .dropbtn {
   background-color: black;
+}
+#tables {
+  display: none;
+  background-color: rgba(251, 247, 247, 0.7);
+  width: 70%;
+  height: 90%;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  z-index: 4;
+
+  .table-header {
+    font-size: 4rem;
+  }
+  .table-header2 {
+    margin: 1rem 0;
+    font-size: 3em;
+  }
+  .styled-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    text-align: center;
+    width: 70%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    thead tr {
+      background-color: #009879;
+      color: #ffffff;
+    }
+    th,
+    td {
+      padding: 12px 15px;
+    }
+    tbody tr {
+      background-color: rgba(255, 255, 255, 0.959);
+      z-index: 4;
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+    tbody tr.style-row {
+      font-weight: bold;
+      color: #009879;
+    }
+  }
+}
+#first-table {
+  scroll-behavior: smooth;
+  //   height: 30%;
+  height: 33%;
+  //   width: 630px;
+  overflow: scroll;
 }
