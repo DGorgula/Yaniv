@@ -234,7 +234,6 @@ function renderBoard(gameControl) {
 }
 
 function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
-  const playerId = player.id;
   const playerName = player.name;
   const playerAvatar = player.avatar;
   const playerScore = player.score;
@@ -272,6 +271,8 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
     "Hand: " + playerCardsSum,
     playerProfile
   );
+  const playerCards = newElement("div", "player-deck", null, playerContainer);
+
   // newElement("span", "id-span", playerId, playerContainer);
 
   // display only cards of the player that has the turn
@@ -295,19 +296,30 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
     //   "Hand: " + playerCardsSum,
     //   playerContainer
     // );
-    const playerCards = newElement("div", "player-deck", null, playerContainer);
+    // const playerCards = newElement("div", "player-deck", null, playerContainer);
     for (let card of playerDeck) {
-      const newCardElement = document.createElement("img");
-      newCardElement.setAttribute(
+      const newOpenedCardElement = document.createElement("img");
+      newOpenedCardElement.setAttribute(
         "src",
         `./assets/cards/${card.cardName()}.png`
       );
-      newCardElement.classList.add("player-card");
-      newCardElement.addEventListener("click", (e) => {
+      newOpenedCardElement.classList.add("player-card");
+      newOpenedCardElement.addEventListener("click", (e) => {
         if (checkValidChoose(card, playerDeck)) {
           card.chooseToggle(newCardElement);
         }
       });
+      playerCards.append(newOpenedCardElement);
+    }
+  }
+  else {
+    for (let card of playerDeck) {
+      const newCardElement = document.createElement("img");
+      newCardElement.setAttribute(
+        "src",
+        `./assets/red_back.png`
+      );
+      newCardElement.classList.add("player-card");
       playerCards.append(newCardElement);
     }
   }

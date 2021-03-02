@@ -26,9 +26,9 @@ addPlayerButton.addEventListener("click", (event) => {
 startGameButton.addEventListener("click", (event) => {
   Functions.startGame(gameControl);
 });
-// startNewGameButton.addEventListener("click", () => {
-//   document.location.reload(true);
-// });
+startNewGameButton.addEventListener("click", () => {
+  document.location.reload(true);
+});
 
 // variables
 
@@ -50,4 +50,4 @@ exitRulesButton.addEventListener("click", (event) => {
   }
 });
 
-aboutUsButton.addEventListener("click", (event) => {});
+aboutUsButton.addEventListener("click", (event) => { });
