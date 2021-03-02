@@ -10,11 +10,6 @@ body {
   overflow: hidden;
   font-family: arvo;
 }
-#start-new-game {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
 
 #form-background {
   position: absolute;
@@ -25,14 +20,14 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
-  z-index: 1;
+  z-index: 2;
 
   #form-container {
     background-color: rgba(255, 255, 255, 0.3);
     width: 50%;
     height: 42%;
     margin: auto;
-    z-index: 2;
+    z-index: 3;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -91,8 +86,6 @@ body {
 .buttons {
   width: 20rem;
   height: 2rem;
-  // color: white;
-  // background-color: rgb(199, 194, 194);
   font-size: 18px;
   margin-top: 5px;
   border: 2px solid transparent;
@@ -116,38 +109,34 @@ body {
   width: 100%;
   height: 100%;
 
-  #score-table {
-    grid-row: 2;
-    grid-column: 2;
-  }
-
   .yaniv-before-button {
-    background-image: url("./assets/IMG_6866.PNG");
+    background-image: url("./assets/yanivBefore1.PNG");
     background-position: center;
     background-size: cover;
     position: absolute;
     top: 0;
     right: 0;
-    width: 10%;
-    height: 10%;
-    outline: none;
+    width: 8%;
+    height: 14%;
   }
 
   .yaniv {
-    background-image: url("./assets/yanivgreen.jpeg");
+    background-image: url("./assets/yanivAfter1.PNG");
     background-size: cover;
     background-position: center;
     position: absolute;
     top: 0;
     right: 0;
-    width: 10%;
-    height: 10%;
+    width: 8%;
+    height: 14%;
   }
 }
+
 #card-sentence {
   grid-row: 4;
   grid-column: 2/4;
   color: white;
+  z-index: 1;
 }
 
 #desk-div {
@@ -181,16 +170,19 @@ body {
 }
 
 .player-profile {
-  // background-color: yellow;
+  background-color: white;
   display: flex;
 }
 .current-player,
 .top-player {
   .player-profile {
     flex-direction: column;
-    justify-content: space-around;
+    // justify-content: space-around;
     align-items: center;
-    height: 100%;
+    // height: 100%;
+  }
+  .score-span {
+    padding: 8px 0px;
   }
 }
 
@@ -198,8 +190,15 @@ body {
 .left-player {
   .player-profile {
     flex-direction: row;
-    justify-content: space-around;
+    // width: 55%;
+    width: fit-content;
     align-items: center;
+  }
+  .score-span {
+    padding: 0px 8px;
+  }
+  .name-span {
+    padding: 0px 5px;
   }
 }
 
@@ -212,10 +211,10 @@ body {
   grid-row: 6;
 
   .cards-sum-span {
-    background-color: rgb(180, 143, 75);
+    background-color: white;
     display: flex;
     align-content: center;
-    margin-left: 0.5rem;
+    // margin-left: 0.5rem;
   }
   .player-deck {
     display: flex;
@@ -235,7 +234,7 @@ body {
   grid-column: 1;
   grid-row: 1/5;
   .cards-sum-span {
-    background-color: orange;
+    background-color: white;
     display: flex;
     align-self: center;
     margin-top: 0.5rem;
@@ -248,7 +247,7 @@ body {
   .player-card {
     transform: rotate(90deg);
     margin-left: 1.5rem;
-    width: 48%;
+    width: 47%;
     grid-column: 1;
     grid-row: 1/6;
   }
@@ -263,15 +262,16 @@ body {
   grid-row: 1;
 
   .cards-sum-span {
-    background-color: orange;
+    background-color: white;
     display: flex;
     align-content: center;
-    margin-right: 0.7rem;
+    // margin-right: 0.7rem;
   }
   .player-deck {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-top: 1.5rem;
   }
   .player-card {
     width: 10%;
@@ -286,7 +286,7 @@ body {
   grid-row: 3/7;
 
   .cards-sum-span {
-    background-color: orange;
+    background-color: white;
     display: flex;
     align-self: center;
     margin-bottom: 0.5rem;
@@ -299,7 +299,7 @@ body {
   .player-card {
     transform: rotate(90deg);
     margin-left: 1.5rem;
-    width: 48%;
+    width: 47%;
     grid-column: 5;
     grid-row: 1/6;
   }
@@ -582,4 +582,50 @@ ul li ul li a {
     top: 0;
     right: 0;
   }
+}
+
+.dropbtn {
+  background-color: rgb(158, 9, 9);
+  color: white;
+  padding: 13px;
+  font-size: 20px;
+  border: none;
+}
+
+.dropup {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.dropup-content {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropup-content .btn-in {
+  color: white;
+  background-color: #4d4e4e;
+  font-size: 15px;
+  padding: 5px 16px;
+  text-decoration: none;
+  width: 100%;
+  display: block;
+}
+
+.dropup-content .btn-in:hover {
+  background-color: rgb(160, 34, 12);
+}
+
+.dropup:hover .dropup-content {
+  display: block;
+}
+
+.dropup:hover .dropbtn {
+  background-color: black;
 }

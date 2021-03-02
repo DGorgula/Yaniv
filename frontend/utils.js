@@ -258,14 +258,21 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
     playerContainer
   );
   newElement("span", "name-span", playerName, playerProfile);
+  newElement("span", "score-span", playerScore, playerProfile);
   newElement(
     "span",
     `avatar-img${playerAvatar.slice(-1)}`,
     null,
     playerProfile
   );
-  newElement("span", "score-span", playerScore, playerProfile);
-  newElement("span", "id-span", playerId, playerContainer);
+
+  newElement(
+    "span",
+    "cards-sum-span",
+    "Hand: " + playerCardsSum,
+    playerProfile
+  );
+  // newElement("span", "id-span", playerId, playerContainer);
 
   // display only cards of the player that has the turn
   if (player.turn === true) {
@@ -282,7 +289,12 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
       // yanivButton.classList.remove("yaniv");
       yanivButton.classList.add("yaniv-before-button");
     }
-    newElement("span", "cards-sum-span", playerCardsSum, playerContainer);
+    // newElement(
+    //   "span",
+    //   "cards-sum-span",
+    //   "Hand: " + playerCardsSum,
+    //   playerContainer
+    // );
     const playerCards = newElement("div", "player-deck", null, playerContainer);
     for (let card of playerDeck) {
       const newCardElement = document.createElement("img");

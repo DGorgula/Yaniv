@@ -11,12 +11,6 @@ body {
   font-family: arvo;
 }
 
-#start-new-game {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
-
 #form-background {
   position: absolute;
   background-image: url(./assets/palm-trees-on-white-beach.jpg);
@@ -30,7 +24,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  z-index: 1;
+  z-index: 2;
 }
 
 #form-background #form-container {
@@ -38,7 +32,7 @@ body {
   width: 50%;
   height: 42%;
   margin: auto;
-  z-index: 2;
+  z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,34 +148,26 @@ body {
   height: 100%;
 }
 
-#desk-container #score-table {
-  -ms-grid-row: 2;
-  grid-row: 2;
-  -ms-grid-column: 2;
-  grid-column: 2;
-}
-
 #desk-container .yaniv-before-button {
-  background-image: url("./assets/IMG_6866.PNG");
+  background-image: url("./assets/yanivBefore1.PNG");
   background-position: center;
   background-size: cover;
   position: absolute;
   top: 0;
   right: 0;
-  width: 10%;
-  height: 10%;
-  outline: none;
+  width: 8%;
+  height: 14%;
 }
 
 #desk-container .yaniv {
-  background-image: url("./assets/yanivgreen.jpeg");
+  background-image: url("./assets/yanivAfter1.PNG");
   background-size: cover;
   background-position: center;
   position: absolute;
   top: 0;
   right: 0;
-  width: 10%;
-  height: 10%;
+  width: 8%;
+  height: 14%;
 }
 
 #card-sentence {
@@ -191,6 +177,7 @@ body {
   -ms-grid-column-span: 2;
   grid-column: 2/4;
   color: white;
+  z-index: 1;
 }
 
 #desk-div {
@@ -238,6 +225,7 @@ body {
 }
 
 .player-profile {
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -249,12 +237,14 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 100%;
+}
+
+.current-player .score-span,
+.top-player .score-span {
+  padding: 8px 0px;
 }
 
 .right-player .player-profile,
@@ -263,11 +253,22 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.right-player .score-span,
+.left-player .score-span {
+  padding: 0px 8px;
+}
+
+.right-player .name-span,
+.left-player .name-span {
+  padding: 0px 5px;
 }
 
 .current-player {
@@ -292,13 +293,12 @@ body {
 }
 
 .current-player .cards-sum-span {
-  background-color: #b48f4b;
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-line-pack: center;
       align-content: center;
-  margin-left: 0.5rem;
 }
 
 .current-player .player-deck {
@@ -336,7 +336,7 @@ body {
 }
 
 .left-player .cards-sum-span {
-  background-color: orange;
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -361,7 +361,7 @@ body {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
   margin-left: 1.5rem;
-  width: 48%;
+  width: 47%;
   -ms-grid-column: 1;
   grid-column: 1;
   -ms-grid-row: 1;
@@ -391,13 +391,12 @@ body {
 }
 
 .top-player .cards-sum-span {
-  background-color: orange;
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-line-pack: center;
       align-content: center;
-  margin-right: 0.7rem;
 }
 
 .top-player .player-deck {
@@ -409,6 +408,7 @@ body {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  margin-top: 1.5rem;
 }
 
 .top-player .player-card {
@@ -435,7 +435,7 @@ body {
 }
 
 .right-player .cards-sum-span {
-  background-color: orange;
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -460,7 +460,7 @@ body {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
   margin-left: 1.5rem;
-  width: 48%;
+  width: 47%;
   -ms-grid-column: 5;
   grid-column: 5;
   -ms-grid-row: 1;
@@ -769,5 +769,52 @@ ul li ul li a {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.dropbtn {
+  background-color: #9e0909;
+  color: white;
+  padding: 13px;
+  font-size: 20px;
+  border: none;
+}
+
+.dropup {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.dropup-content {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  min-width: 150px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropup-content .btn-in {
+  color: white;
+  background-color: #4d4e4e;
+  font-size: 15px;
+  padding: 5px 16px;
+  text-decoration: none;
+  width: 100%;
+  display: block;
+}
+
+.dropup-content .btn-in:hover {
+  background-color: #a0220c;
+}
+
+.dropup:hover .dropup-content {
+  display: block;
+}
+
+.dropup:hover .dropbtn {
+  background-color: black;
 }
 /*# sourceMappingURL=style.css.map */
