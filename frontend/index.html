@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <script defer type="module" src="./main.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arvo&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,17 +37,25 @@
                 <a href="#">Contact &dtrif;</a>
                 <ul class="dropdown">
                   <li>
-                    <a href="https://github.com/benhanover" target="_blank">♦ Ben Hanover ♦</a>
+                    <a href="https://github.com/benhanover" target="_blank"
+                      >♦ Ben Hanover ♦</a
+                    >
                   </li>
 
                   <li>
-                    <a href="https://github.com/amit751" target="_blank">♥ Amit Mor ♥</a>
+                    <a href="https://github.com/amit751" target="_blank"
+                      >♥ Amit Mor ♥</a
+                    >
                   </li>
                   <li>
-                    <a href="https://github.com/DGorgula" target="_blank">♣ Gil Danks ♣</a>
+                    <a href="https://github.com/DGorgula" target="_blank"
+                      >♣ Gil Danks ♣</a
+                    >
                   </li>
                   <li>
-                    <a href="https://github.com/amitby98" target="_blank">♠ Amit Ben Yaakov ♠</a>
+                    <a href="https://github.com/amitby98" target="_blank"
+                      >♠ Amit Ben Yaakov ♠</a
+                    >
                   </li>
                 </ul>
               </li>
@@ -61,10 +72,22 @@
           <h1 id="welcome-title">Welcome to Yaniv's place!</h1>
         </section>
         <section id="form">
-          <input type="text" id="player-name" class="nameInput" placeholder="Enter player name" maxlength="4" />
+          <input
+            type="text"
+            id="player-name"
+            class="nameInput"
+            placeholder="Enter player name"
+            maxlength="4"
+          />
 
           <section id="avatars">
-            <input type="radio" id="avatar1" name="avatar" value="avatar1" checked />
+            <input
+              type="radio"
+              id="avatar1"
+              name="avatar"
+              value="avatar1"
+              checked
+            />
             <label for="avatar1" class="avatar-img1"></label>
             <input type="radio" id="avatar2" name="avatar" value="avatar2" />
             <label for="avatar2" class="avatar-img2"></label>
@@ -84,27 +107,38 @@
         <h1>Game Rules</h1>
         <h2>Objective</h2>
         <p>
-          The objective of the game is to earn the fewest points in each round.<br />
-          The player with the fewest points at the end of the game is the winner.<br />
+          The objective of the game is to earn the fewest points in each
+          round.<br />
+          The player with the fewest points at the end of the game is the
+          winner.<br />
           Each round in the game ends when a player declares "Yaniv!",<br />
           Each player's score is calculated from their remaining cards. <br />
-          The player with the lowest score wins the round and receives no points for the round.<br />
+          The player with the lowest score wins the round and receives no points
+          for the round.<br />
           Other players record their corresponding scores for the round.
         </p>
         <h2>Play</h2>
         <p>
-          The game proceeds clockwise. Since the starting player in each round<br />
-          has an advantage, the starting player in the first chosen at random.<br />
-          In subsequent rounds, the winner of the previous round becomes the starting player.<br />
+          The game proceeds clockwise. Since the starting player in each
+          round<br />
+          has an advantage, the starting player in the first chosen at
+          random.<br />
+          In subsequent rounds, the winner of the previous round becomes the
+          starting player.<br />
           Players have two options for their turn: <br />
           They may either play one or more cards or call "Yaniv!". <br />
-          When playing cards, the player may discard a single card or a single set of cards, placing them into the discard pile.<br />
+          When playing cards, the player may discard a single card or a single
+          set of cards, placing them into the discard pile.<br />
           The player must then draw a card from the draw pile.<br />
-          Alternatively, the player may choose to take the card played by the previous player from the discard pile.<br />
-          However, if the previous player played a multi-card set, only the first or the last card in the set may be chosen.<br />
+          Alternatively, the player may choose to take the card played by the
+          previous player from the discard pile.<br />
+          However, if the previous player played a multi-card set, only the
+          first or the last card in the set may be chosen.<br />
           Note that the two jokers in the deck are taken into consideration.<br />
-          If the drawing deck is empty and no one has yet called "Yaniv!", then all cards of the free stack,<br />
-          excluding the last player's drop, are shuffled and placed face down as a new deck.
+          If the drawing deck is empty and no one has yet called "Yaniv!", then
+          all cards of the free stack,<br />
+          excluding the last player's drop, are shuffled and placed face down as
+          a new deck.
         </p>
         <h2>Sets</h2>
         <p>
@@ -117,14 +151,21 @@
         </p>
         <h2>Calling "Yaniv!"</h2>
         <p>
-          At the beginning of their turn, instead of playing cards, a player may call "Yaniv!"<br />
-          if their current score (the sum of all card values in the player's hand)<br />
+          At the beginning of their turn, instead of playing cards, a player may
+          call "Yaniv!"<br />
+          if their current score (the sum of all card values in the player's
+          hand)<br />
           is less than 7.<br />
-          When a player calls "Yaniv!," the round ends, and all players reveal their card totals.<br />
-          If the player who called "Yaniv!" has the lowest card total, they score 0 points;<br />
-          However, if another player has a total less than or equal to the calling player's total (a situation called "Asaf"),<br />
-          the calling player scores points equal to their card total plus 30 penalty points.<br />
-          All other players, regardless of whether their card totals are lower than the calling player's total,<br />
+          When a player calls "Yaniv!," the round ends, and all players reveal
+          their card totals.<br />
+          If the player who called "Yaniv!" has the lowest card total, they
+          score 0 points;<br />
+          However, if another player has a total less than or equal to the
+          calling player's total (a situation called "Asaf"),<br />
+          the calling player scores points equal to their card total plus 30
+          penalty points.<br />
+          All other players, regardless of whether their card totals are lower
+          than the calling player's total,<br />
           score points equal to their card totals. <br />
           The winner of the round is the player with the lowest card total.<br />
           They become the dealer and the starting player for the next round.
@@ -133,7 +174,8 @@
         <p>
           When a player's point total (the sum of the totals for each round)<br />
           crosses 200 points, that player is eliminated from the game.<br />
-          Once all players but one have been eliminated, the remaining player is declared the winner.<br />
+          Once all players but one have been eliminated, the remaining player is
+          declared the winner.<br />
           There are two variations:<br />
           ➡ A certain limit is set. Whenever a player crosses that limit,<br />
           the game ends and the victor is the one with the smallest score.<br />
@@ -143,9 +185,11 @@
         </p>
         <h2>⚠ Important stuff! ⚠</h2>
         <p>
-          When a player's score reaches above 200 points, he is out of the game.<br />
+          When a player's score reaches above 200 points, he is out of the
+          game.<br />
           If you reach exactly 200 points, your score is set back to 0.<br />
-          When a player declares 'Yaniv!', but gets beaten by another player's<br />
+          When a player declares 'Yaniv!', but gets beaten by another
+          player's<br />
           'Assaf!' call, he is then fined 30 points.
         </p>
       </div>
@@ -159,7 +203,9 @@
     </div>
     <div id="desk-container">
       <div id="card-sentence">
-        <p>We cannot change the cards we are dealt, just how we play the game</p>
+        <p>
+          We cannot change the cards we are dealt, just how we play the game
+        </p>
       </div>
     </div>
   </body>

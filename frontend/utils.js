@@ -249,6 +249,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
     deskContainer
   );
   playerContainer.classList.add(playerPosition);
+  const playerCards = newElement("div", "player-deck", null, playerContainer);
 
   const playerProfile = newElement(
     "div",
@@ -271,7 +272,6 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
     "Hand: " + playerCardsSum,
     playerProfile
   );
-  const playerCards = newElement("div", "player-deck", null, playerContainer);
 
   // newElement("span", "id-span", playerId, playerContainer);
 
@@ -306,19 +306,15 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
       newOpenedCardElement.classList.add("player-card");
       newOpenedCardElement.addEventListener("click", (e) => {
         if (checkValidChoose(card, playerDeck)) {
-          card.chooseToggle(newCardElement);
+          card.chooseToggle(newOpenedCardElement);
         }
       });
       playerCards.append(newOpenedCardElement);
     }
-  }
-  else {
+  } else {
     for (let card of playerDeck) {
       const newCardElement = document.createElement("img");
-      newCardElement.setAttribute(
-        "src",
-        `./assets/red_back.png`
-      );
+      newCardElement.setAttribute("src", `./assets/red_back.png`);
       newCardElement.classList.add("player-card");
       playerCards.append(newCardElement);
     }

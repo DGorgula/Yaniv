@@ -48,7 +48,9 @@ function getCheckedAvatar() {
 
 function switchTurn(gameControl) {
   const players = gameControl.players;
-  const playerTurnIndex = players.findIndex((player) => { return player.turn === true });
+  const playerTurnIndex = players.findIndex((player) => {
+    return player.turn === true;
+  });
   players[playerTurnIndex].turn = false;
   if (playerTurnIndex === players.length - 1) {
     players[0].turn = true;
@@ -78,7 +80,6 @@ function updatePlayersCardsCounter(gameControl) {
     player.sumHand();
   }
 }
-
 
 // returns all possible valid sets from the player deck
 function allValidPossibleSets(playerDeck) {
@@ -117,7 +118,10 @@ function validSet(setArray) {
       continue;
     }
     // pushes the last cell of setArry if part of consecutive numbers;
-    else if (index === setArray.length - 2 && setArray[index].id === setArray[index + 1].id - 1) {
+    else if (
+      index === setArray.length - 2 &&
+      setArray[index].id === setArray[index + 1].id - 1
+    ) {
       validSetArray.push(setArray[index]);
       validSetArray.push(setArray[index + 1]);
       console.log("1");
@@ -126,10 +130,12 @@ function validSet(setArray) {
     else if (setArray[index].id === setArray[index + 1].id - 1) {
       validSetArray.push(setArray[index]);
       console.log("2");
-    }
-    else {
-      // pushes the last consecutive number and breaks if the length is sufficient 
-      if (validSetArray.length > 1 && setArray[index - 1].id === setArray[index].id - 1) {
+    } else {
+      // pushes the last consecutive number and breaks if the length is sufficient
+      if (
+        validSetArray.length > 1 &&
+        setArray[index - 1].id === setArray[index].id - 1
+      ) {
         validSetArray.push(setArray[index]);
         console.log("4");
         break;
@@ -139,23 +145,26 @@ function validSet(setArray) {
         validSetArray = [];
         console.log("3");
       }
-
     }
   }
   return validSetArray.length > 2 ? validSetArray : false;
 }
 
 // LISTENNNNNNNNNNNN
-//when fixing jockers make sure to add the jokers to the array 
+//when fixing jockers make sure to add the jokers to the array
 // returns array of arrays including all possible set combinations.
 function possibleSetCombinations(playerDeck) {
-  const suits = ['heart', 'diamond', 'club', 'spade'];
+  const suits = ["heart", "diamond", "club", "spade"];
   const setsCombinations = [];
 
-  const jokerArr = playerDeck.filter((card) => { return card.id === 0 });
+  const jokerArr = playerDeck.filter((card) => {
+    return card.id === 0;
+  });
   const jokerCounter = jokerArr.length;
   for (const suit of suits) {
-    const suitArr = playerDeck.filter((card) => { return card.suit === suit });
+    const suitArr = playerDeck.filter((card) => {
+      return card.suit === suit;
+    });
     switch (jokerCounter) {
       case 2:
         if (suitArr.length > 0) {
@@ -189,6 +198,5 @@ export {
   updatePlayersCardsCounter,
   validSet,
   allValidPossibleSets,
-  possibleSetCombinations
+  possibleSetCombinations,
 };
-
