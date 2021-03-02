@@ -19,7 +19,6 @@ body {
 #form-background {
   position: absolute;
   background-image: url(./assets/palm-trees-on-white-beach.jpg);
-  // background-image: url(./assets/tropical-summer-beach-art-templates.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -63,8 +62,6 @@ body {
         display: flex;
         flex-direction: column;
         background-color: white;
-        // color: white;
-        // background-color: rgba(255, 255, 255, 0.3);
       }
       .welcome-player-div span {
         padding: 0 20px;
@@ -94,8 +91,8 @@ body {
 .buttons {
   width: 20rem;
   height: 2rem;
-  color: white;
-  background-color: rgb(199, 194, 194);
+  // color: white;
+  // background-color: rgb(199, 194, 194);
   font-size: 18px;
   margin-top: 5px;
   border: 2px solid transparent;
@@ -108,7 +105,6 @@ body {
 }
 
 #desk-container {
-  // background-color: #ebc580;
   background-image: url(./assets/table.jpeg);
   background-repeat: no-repeat;
   background-position: center;
@@ -126,8 +122,7 @@ body {
   }
 
   .yaniv-before-button {
-    // background-image: url(./assets/yanibefore.jpeg);
-    background-image: url("./assets/yanivgreen.jpeg");
+    background-image: url("./assets/IMG_6866.PNG");
     background-position: center;
     background-size: cover;
     position: absolute;
@@ -139,8 +134,7 @@ body {
   }
 
   .yaniv {
-    // background-image: url(./assets/yaniv.jpeg);
-    background-image: url("./assets/yanivBa.jpeg");
+    background-image: url("./assets/yanivgreen.jpeg");
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -169,8 +163,6 @@ body {
 
   .pile-deck {
     margin-right: 1rem;
-    background-image: url(./assets/gray_back.png);
-    background-size: cover;
     width: 6rem;
     height: 100%;
     display: flex;
@@ -179,8 +171,7 @@ body {
   }
 
   .table-deck {
-    // background-image: url(./assets/yanivdeck.jpeg);
-    background-image: url(./assets/gray_back.png);
+    background-image: url(./assets/red_back.png);
     background-size: cover;
     width: 6rem;
     height: 100%;
@@ -213,7 +204,6 @@ body {
 }
 
 .current-player {
-  // background-color: rgb(11, 124, 11);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -239,7 +229,6 @@ body {
 }
 
 .left-player {
-  // background-color: brown;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -266,7 +255,6 @@ body {
 }
 
 .top-player {
-  // background-color: brown;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -291,7 +279,6 @@ body {
   }
 }
 .right-player {
-  // background-color: brown;
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
@@ -396,7 +383,7 @@ body {
 }
 
 .chosen {
-  border: solid green;
+  border: solid rgb(235, 250, 235);
   border-radius: 10px;
 }
 
@@ -515,7 +502,6 @@ nav {
       clear: both;
       width: 100%;
       text-align: center;
-      // margin-bottom: 20px;
       border-style: none;
     }
 

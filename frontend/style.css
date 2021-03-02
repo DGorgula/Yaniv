@@ -124,8 +124,6 @@ body {
 .buttons {
   width: 20rem;
   height: 2rem;
-  color: white;
-  background-color: #c7c2c2;
   font-size: 18px;
   margin-top: 5px;
   border: 2px solid transparent;
@@ -164,7 +162,7 @@ body {
 }
 
 #desk-container .yaniv-before-button {
-  background-image: url("./assets/yanivgreen.jpeg");
+  background-image: url("./assets/IMG_6866.PNG");
   background-position: center;
   background-size: cover;
   position: absolute;
@@ -176,7 +174,7 @@ body {
 }
 
 #desk-container .yaniv {
-  background-image: url("./assets/yanivBa.jpeg");
+  background-image: url("./assets/yanivgreen.jpeg");
   background-size: cover;
   background-position: center;
   position: absolute;
@@ -217,8 +215,6 @@ body {
 
 #desk-div .pile-deck {
   margin-right: 1rem;
-  background-image: url(./assets/gray_back.png);
-  background-size: cover;
   width: 6rem;
   height: 100%;
   display: -webkit-box;
@@ -231,7 +227,7 @@ body {
 }
 
 #desk-div .table-deck {
-  background-image: url(./assets/gray_back.png);
+  background-image: url(./assets/red_back.png);
   background-size: cover;
   width: 6rem;
   height: 100%;
@@ -555,7 +551,7 @@ body {
 }
 
 .chosen {
-  border: solid green;
+  border: solid #ebfaeb;
   border-radius: 10px;
 }
 

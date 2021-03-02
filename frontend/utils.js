@@ -219,7 +219,7 @@ function renderBoard(gameControl) {
   const deskContainer = document.getElementById("desk-container");
   // Reminder for security problem.
   deskContainer.innerHTML = "";
-  const yanivButton = newElement("button", null, null, deskContainer, null);
+  const yanivButton = newElement("span", null, null, deskContainer, null);
   const players = gameControl.players;
   const playerPositions = createPlayerPositions(players);
   for (let index = 0; index < players.length; index++) {
@@ -269,9 +269,9 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
 
   // display only cards of the player that has the turn
   if (player.turn === true) {
-    // if (playerCardsSum <= 7) {
-    if (playerCardsSum <= 100) {
-      // yanivButton.classList.remove('yaniv-before-button');
+    if (playerCardsSum <= 7) {
+      // if (playerCardsSum <= 100) {
+      // yanivButton.classList.remove("yaniv-before-button");
       yanivButton.classList.add("yaniv");
       yanivButton.addEventListener("click", () => {
         gameControl.yanivDeclaration = player;
@@ -279,7 +279,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
         yanivListener(gameControl);
       });
     } else {
-      // yanivButton.classList.remove('yaniv');
+      // yanivButton.classList.remove("yaniv");
       yanivButton.classList.add("yaniv-before-button");
     }
     newElement("span", "cards-sum-span", playerCardsSum, playerContainer);
