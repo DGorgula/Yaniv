@@ -157,6 +157,7 @@ body {
   grid-row: 3;
   -ms-grid-column: 4;
   grid-column: 4;
+  z-index: 1;
   width: 80%;
   height: 100%;
 }
@@ -165,13 +166,13 @@ body {
   background-image: url("./assets/yanivAfter1.PNG");
   background-size: cover;
   background-position: center;
-  margin-right: 4rem;
   -ms-grid-row: 3;
   grid-row: 3;
   -ms-grid-column: 4;
   grid-column: 4;
-  width: 35%;
+  width: 80%;
   height: 100%;
+  z-index: 1;
 }
 
 #card-sentence {

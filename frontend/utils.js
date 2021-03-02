@@ -279,7 +279,7 @@ function createPlayerDiv(player, playerPosition, yanivButton, gameControl) {
   if (player.turn === true) {
     if (playerCardsSum <= 7) {
       // if (playerCardsSum <= 100) {
-      // yanivButton.classList.remove("yaniv-before-button");
+      yanivButton.classList.remove("yaniv-before-button");
       yanivButton.classList.add("yaniv");
       yanivButton.addEventListener("click", () => {
         gameControl.yanivDeclaration = player;
@@ -420,7 +420,6 @@ function renderScoreTable(gameControl) {
 function yanivRender(gameControl) {
   // REVEAL EVERYONE CARDS
   // remove event listeners player deck and desks deck
-  //
   const players = gameControl.players;
   for (const player of players) {
     player.turn = true;
